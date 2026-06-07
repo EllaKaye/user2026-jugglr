@@ -13,6 +13,9 @@ format:
 
 # My interests {.inverse}
 
+
+# Slide templates {.inverse}
+
 ## Colours
 
 Colour classes for text and highlights:
@@ -23,9 +26,8 @@ Colour classes for text and highlights:
 
 [neon-blue]{.neon-blue}
 
-[neon-purple]{.neon-purple}
-
 [neon-pink]{.neon-pink}
+
 :::
 
 
@@ -34,9 +36,13 @@ Colour classes for text and highlights:
 
 [neon-blue-hl]{.neon-blue-hl}
 
-[neon-purple-hl]{.neon-purple-hl}
-
 [neon-pink-hl]{.neon-pink-hl}
+
+[neon-coral-hl]{.neon-coral-hl}
+
+[neon-orange-hl]{.neon-orange-hl}
+
+[neon-yellow-hl]{.neon-yellow-hl}
 :::
 ::::
 
@@ -68,9 +74,6 @@ Colour classes for text and highlights:
 :::
 ::::
 
-## {.neon-pink-bg .center-h .center .larger200 footer=false}
-
-Neon backgrounds for stressing **key points**
 
 ## Columns with backgrounds
 
@@ -89,7 +92,7 @@ Box 2: blue
 :::
 
 ::: {.column .col-box-neon-green width="32%"}
-Box 3: purple
+Box 3: green
 :::
 :::
 
