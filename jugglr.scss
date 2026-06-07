@@ -1,0 +1,297 @@
+/*-- scss:defaults --*/
+@import url(https://fonts.googleapis.com/css?family=Fira+Mono&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Figtree:400,700&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Outfit:400,700&display=swap);
+
+$font-family-sans-serif: Figtree, Helvetica, sans-serif !default;
+$font-family-monospace: "Fira Mono", monospace;
+$headings-font-family: Outfit, Helvetica, sans-serif !default;
+
+// My colours
+$neon-purple: #CF4A9B;
+$neon-blue: #00BAE2; 
+$neon-green: #5DBA46;
+$neon-pink: #FF7277;
+$neon-yellow: #FFE900;
+$neon-orange: #FFAA4D;
+$pastel-purple: #DED3E7;
+$pastel-blue: #D7E1EE; 
+$pastel-green: #D8E9D3;
+$pastel-pink: #F7DFDA;
+
+
+$dark: #212129;
+$gray: #ADADBD;
+$light: #F8F8FA; 
+$white: #FFF;
+
+$primary: $neon-purple !default;
+
+$presentation-font-size-root: 40px;
+$code-block-font-size: .7em;
+$presentation-heading-font: $headings-font-family;
+$body-color: $dark;
+$link-color: $neon-blue;
+$code-color: $neon-purple;
+
+$callout-color-note: $neon-blue;
+$callout-color-caution: $neon-purple;
+$callout-color-tip: $neon-green;
+$callout-color-important: $neon-pink;
+$callout-color-warning: $neon-orange;
+
+/*-- scss:rules --*/
+
+// Create a map using color names
+$colors: (
+    'neon-purple': $neon-purple,
+    'neon-blue': $neon-blue,
+    'neon-green': $neon-green,
+    'neon-pink': $neon-pink,
+    'pastel-purple': $pastel-purple,
+    'pastel-blue': $pastel-blue,
+    'pastel-green': $pastel-green,
+    'pastel-pink': $pastel-pink
+);
+
+
+// text colours
+@each $name, $color in $colors {
+    .#{$name} {
+        color: $color;
+        font-weight: 700;
+    }
+}
+
+// text highlight colours
+@mixin hl($padding: 5px 15px) {
+  font-weight: 700;
+  padding: $padding;
+}
+
+@each $name, $color in $colors {
+    .#{$name}-hl {
+        @include hl;
+        background: $color;
+        color: $dark;
+    }
+}
+
+// slide background colours
+@each $name, $color in $colors {
+    .#{$name}-bg {
+      .slide-background-content {
+        background-color: $color;
+      }
+      color: $dark;
+
+      h1, h2, h3, h4, h5, h6 {
+        color: $dark;
+      }
+    }
+}
+
+// mixin for boxes with height parameter
+@mixin box-style($height: 450px) {  // 450px is default value
+    border-radius: 25px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    height: $height;
+}
+
+// Generate styles for each box
+@each $name, $color in $colors {
+    .col-box-#{$name} {
+        @include box-style;
+        background: $color;
+        color: $dark;
+    }
+
+    // Create a tall variant
+    .col-box-#{$name}-tall {
+        @include box-style(550px);
+        background: $color;
+        color: $dark;
+    }
+
+    // two shorts with 10px gap stack to same height as tall
+    .col-box-#{$name}-short {
+        @include box-style(270px);
+        background: $color;
+        color: $dark;
+    }
+}
+
+// Correct the alignment and spacing of the title in the callouts
+.reveal .callout {
+    .callout-title {
+        display: flex;
+        align-items: center;
+        
+        .callout-icon-container {
+        margin-right: 0.1rem;  // Add space after the icon
+        }
+
+        p {
+        margin: 0;
+        padding: 0;
+        align-self: center;
+        }
+    }
+}
+
+// color classes
+.primary {
+    color: $primary;
+}
+
+// code
+pre.sourceCode {
+    border-radius: 0;
+    border-left-color: $gray;
+}
+
+#title-slide .title {
+    font-size: 70px;
+    padding-bottom: .25em;
+    color: $neon-pink;
+}
+
+#title-slide .subtitle {
+    margin-bottom: 6rem;
+}
+
+.reveal .quarto-title-block .quarto-title-authors {
+    display: block;
+}
+
+.reveal .quarto-title-block .quarto-title-authors .quarto-title-author {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0.5em;
+}
+
+// alignment and spacing
+.center-h {
+    text-align: center;
+}
+
+.right {
+    text-align: right;  
+}
+
+p {
+    padding-bottom: 12px;
+}
+
+.cell {
+    padding-bottom: 20px;
+}
+
+// headings - ensure these rules are not being overridden
+.reveal h2, .reveal h3 {
+    color: $primary;
+}
+
+.reveal h2 {
+    padding-bottom: 20px;
+}
+
+// sizes
+.smaller90 { font-size: 90%; }
+.smaller80 { font-size: 80%; }
+.smaller75 { font-size: 75%; }
+.smaller70 { font-size: 70%; }
+.smaller60 { font-size: 60%; }
+.smaller50 { font-size: 50%; }
+.larger125 { font-size: 125%; }
+.larger150 { font-size: 150%; }
+.larger175 { font-size: 175%; }
+.larger200 { font-size: 200%; }
+.larger250 { font-size: 250%; }
+
+// figure caption
+.reveal .slide figure>figcaption, .reveal .slide img.stretch+p.caption, .reveal .slide img.r-stretch+p.caption {
+    font-size: 0.5em;
+}
+
+// tables
+.reveal table th, .reveal table td {
+    border-bottom: 1px solid;
+    border-color: $gray;
+}
+
+// keyboard
+kbd {
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 5px 9px;
+    background: linear-gradient(178deg, #fff, #fff, #fff, #ddd);
+}
+
+// don't show page number on title-page
+.reveal .slide-number > a[href*='title-slide'] {
+    display: none;
+}
+
+// inverse
+
+.inverse {
+  color: $white;
+
+  h1, h2, h3 {
+    color: $neon-green;
+    
+    code {
+      color: $neon-pink;
+    }
+  }
+  
+  .slide-background-content {
+    background-color: $dark;
+  }
+  
+  a {
+    color: $neon-blue;
+  }
+  
+  p code {
+    color: $neon-purple;
+  }
+  
+  /*
+  // Inverse callout backgrounds
+  div.callout-note.callout-style-default .callout-title {
+    background-color: $blue_dark !important;
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: $gold_dark !important;
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: $ruby_dark !important;
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: $teal_dark !important;
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: $orange_dark !important;
+  }
+  
+  // white icons in inverse mode
+  .callout-icon::before {
+    filter: brightness(0) invert(1);
+  }
+  */
+}
+
+// CRITICAL: This overrides callout title colors in inverse slides
+.inverse .callout-title p { 
+  color: $white !important; 
+}

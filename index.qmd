@@ -1,0 +1,159 @@
+---
+title: Juggling with S7
+author: Ella Kaye
+date: 2026-06-09
+date-format: long
+format: 
+  revealjs: 
+    theme: jugglr.scss
+    syntax-highlighting: jugglr.theme
+---
+
+# My interests {.inverse}
+
+## Colours
+
+Colour classes for text and highlights:
+
+:::: {.columns}
+::: {.column}
+[neon-green]{.neon-green}
+
+[neon-blue]{.neon-blue}
+
+[neon-purple]{.neon-purple}
+
+[neon-pink]{.neon-pink}
+:::
+
+
+::: {.column}
+[neon-green-hl]{.neon-green-hl}
+
+[neon-blue-hl]{.neon-blue-hl}
+
+[neon-purple-hl]{.neon-purple-hl}
+
+[neon-pink-hl]{.neon-pink-hl}
+:::
+::::
+
+## Colours inverse {.inverse}
+
+Colour classes for text and highlights:
+
+:::: {.columns}
+::: {.column}
+
+[pastel-purple]{.pastel-purple}
+
+[pastel-pink]{.pastel-pink}
+
+[pastel-green]{.pastel-green}
+
+[pastel-blue]{.pastel-blue}
+:::
+
+
+::: {.column}
+[pastel-pink-hl]{.pastel-pink-hl}
+
+[pastel-green-hl]{.pastel-green-hl}
+
+[pastel-blue-hl]{.pastel-blue-hl}
+
+[pastel-purple-hl]{.pastel-purple-hl}
+:::
+::::
+
+## {.neon-pink-bg .center-h .center .larger200 footer=false}
+
+Neon backgrounds for stressing **key points**
+
+## Columns with backgrounds
+
+Use class `.col-box-{color}` to apply colour box styling
+
+::: {columns}
+::: {.column .col-box-neon-pink width="32%"}
+Box 1: pink
+
+Default height is 450px
+:::
+
+::: {.column .col-box-neon-blue width="32%"}
+Box 2: blue
+
+:::
+
+::: {.column .col-box-neon-green width="32%"}
+Box 3: purple
+:::
+:::
+
+## Columns with backgrounds
+
+::::: {columns}
+:::: {.column .col-box-pastel-green-tall width="49%"}
+Colour box styling can be applied to entire columns
+
+This has height 600px
+::::
+
+:::: {.column width="49%"}
+:::{.col-box-pastel-pink-short}
+Or to divs within columns to create stacks
+:::
+
+:::{.col-box-pastel-blue-short}
+This div has height 300px
+:::
+
+::::
+
+:::::
+
+## Custom callouts {.smaller80}
+
+:::{.callout-note}
+A note
+:::
+
+:::{.callout-warning}
+A warning
+:::
+
+:::{.callout-important}
+Something important
+:::
+
+:::{.callout-tip}
+This is a good idea
+:::
+
+:::{.callout-caution}
+Be careful about doing this
+:::
+
+## Syntax highlighting
+
+```{r}
+#| echo: true
+#| eval: false
+library(dplyr)
+
+penguins %>%
+  mutate(
+    long_flipper = case_when(
+      species == "Adelie" & flipper_len > 195 ~ TRUE,
+      species == "Chinstrap" & flipper_len > 200 ~ TRUE,
+      species == "Gentoo" & flipper_len > 225 ~ TRUE,
+      TRUE ~ FALSE
+    )
+  ) %>%
+  mutate(
+    body_mass_kg = body_mass / 1000,
+    bill_len_cm = bill_len / 10,
+    bill_dep_cm = bill_dep / 10
+  )
+```
