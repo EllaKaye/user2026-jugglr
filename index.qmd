@@ -11,8 +11,23 @@ format:
     height: 720
 ---
 
-# My interests {.inverse}
+## {background-image="images/learning.png" background-size="contain"}
 
+## {background-image="images/juggling.png" background-size="contain"}
+
+## {background-image="images/maths.png" background-size="contain"}
+
+## {background-image="images/packages.png" background-size="contain"}
+
+## {background-image="images/jugglr-interest.png" background-size="contain"}
+
+# siteswap {.inverse .center-h .larger200}
+
+## {background-image="images/3.gif" background-size="33%" background-position="50% 80%"}
+
+## [33333...]{.larger250 .dark} {background-image="images/3.gif" background-size="33%" background-position="50% 80%"}
+
+## [3]{.larger250 .dark} {background-image="images/3.gif" background-size="33%" background-position="50% 80%"}
 
 # Slide templates {.inverse}
 

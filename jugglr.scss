@@ -137,6 +137,10 @@ $colors: (
     color: $primary;
 }
 
+.dark {
+    color: $dark;
+}
+
 // code
 pre.sourceCode {
     border-radius: 0;
@@ -183,6 +187,7 @@ p {
 // headings - ensure these rules are not being overridden
 .reveal h2, .reveal h3 {
     color: $primary;
+    font-family: $font-family-sans-serif;
 }
 
 .reveal h2 {
@@ -201,6 +206,7 @@ p {
 .larger175 { font-size: 175%; }
 .larger200 { font-size: 200%; }
 .larger250 { font-size: 250%; }
+.larger333 { font-size: 333%; }
 
 // figure caption
 .reveal .slide figure>figcaption, .reveal .slide img.stretch+p.caption, .reveal .slide img.r-stretch+p.caption {
