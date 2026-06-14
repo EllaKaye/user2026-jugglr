@@ -3,15 +3,26 @@ title: Juggling with S7
 author: Ella Kaye
 date: 2026-06-09
 date-format: long
+execute:
+  echo: true
+  eval: true
 format: 
   revealjs: 
     theme: jugglr.scss
     syntax-highlighting: jugglr.theme
     width: 1280
     height: 720
+filters:
+  - diagrams
 ---
 
 ## {background-image="images/learning.png" background-size="contain"}
+
+```{r}
+#| label: setup
+#| include: false
+knitr::opts_chunk$set(message = TRUE)
+```
 
 ## {background-image="images/juggling.png" background-size="contain"}
 
@@ -28,6 +39,63 @@ format:
 ## [33333...]{.larger250 .dark} {background-image="images/3.gif" background-size="33%" background-position="50% 80%"}
 
 ## [3]{.larger250 .dark} {background-image="images/3.gif" background-size="33%" background-position="50% 80%"}
+
+## [4]{.larger250 .dark} {background-image="images/4-cols.gif" background-size="33%" background-position="50% 80%"}
+
+## [423]{.larger250 .dark} {background-image="images/423.gif" background-size="33%" background-position="50% 80%"}
+
+## [(4,4)]{.larger250 .dark} {background-image="images/4s.gif" background-size="33%" background-position="50% 80%"}
+
+## [(4x,4x)]{.larger250 .dark} {background-image="images/4x4x.gif" background-size="33%" background-position="50% 80%"}
+
+## [[43]14]{.larger250 .dark} {background-image="images/4314.gif" background-size="33%" background-position="50% 80%"}
+
+## [(2,6x)([6x4x],2x)]{.larger250 .dark} {background-image="images/sync_multi.gif" background-size="33%" background-position="50% 80%"}
+
+## [<3p|3p>]{.larger250 .dark} {background-image="images/3p.gif" background-size="33%" background-position="50% 80%"}
+
+# {background-image="images/jugglr.png" background-size="contain"}
+
+## Create and validate (juggleable) siteswap
+
+```{r}
+library(jugglr)
+ss423 <- siteswap("423")
+ss423
+```
+
+## Create and validate (unjuggleable) siteswap
+
+```{r}
+ss432 <- siteswap("432")
+ss432
+```
+
+## Visualise with `timeline`
+
+```{r}
+timeline(ss423)
+```
+
+## Visualise with `timeline`
+
+```{r}
+timeline(ss432)
+```
+
+## Visualise with `ladder`
+
+```{r}
+ladder(ss423)
+```
+
+## Visualise with `ladder`
+
+```{r}
+ladder(ss432)
+```
+
+# S7 {.inverse .center-h .larger200}
 
 # Slide templates {.inverse}
 
