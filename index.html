@@ -238,6 +238,294 @@ Ella Kaye
 </section>
 <section id="section-7" class="slide level2" data-background-image="images/3.gif" data-background-size="33%" data-background-position="50% 80%">
 <h2><span class="larger250 dark">3</span></h2>
+</section>
+<section id="section-8" class="slide level2" data-background-image="images/4-cols.gif" data-background-size="33%" data-background-position="50% 80%">
+<h2><span class="larger250 dark">4</span></h2>
+</section>
+<section id="section-9" class="slide level2" data-background-image="images/423.gif" data-background-size="33%" data-background-position="50% 80%">
+<h2><span class="larger250 dark">423</span></h2>
+</section>
+<section id="section-10" class="slide level2" data-background-image="images/4s.gif" data-background-size="33%" data-background-position="50% 80%">
+<h2><span class="larger250 dark">(4,4)</span></h2>
+</section>
+<section id="x4x" class="slide level2" data-background-image="images/4x4x.gif" data-background-size="33%" data-background-position="50% 80%">
+<h2><span class="larger250 dark">(4x,4x)</span></h2>
+</section>
+<section id="section-11" class="slide level2" data-background-image="images/4314.gif" data-background-size="33%" data-background-position="50% 80%">
+<h2><span class="larger250 dark">[43]14</span></h2>
+</section>
+<section id="x6x4x2x" class="slide level2" data-background-image="images/sync_multi.gif" data-background-size="33%" data-background-position="50% 80%">
+<h2><span class="larger250 dark">(2,6x)([6x4x],2x)</span></h2>
+</section>
+<section id="p3p" class="slide level2" data-background-image="images/3p.gif" data-background-size="33%" data-background-position="50% 80%">
+<h2><span class="larger250 dark">&lt;3p|3p&gt;</span></h2>
+</section></section>
+<section>
+<section id="section-12" class="title-slide slide level1 center-h center">
+<h1></h1>
+
+<img data-src="images/jugglr.png" class="r-stretch"><p><a href="https://ellakaye.github.io/jugglr" class="larger200"><strong>ellakaye.github.io/jugglr</strong></a></p>
+</section>
+<section id="create-and-validate-juggleable-siteswap" class="slide level2">
+<h2>Create and validate (juggleable) siteswap</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(jugglr)</span>
+<span id="cb1-2"><a href=""></a>ss423 <span class="ot">&lt;-</span> <span class="fu">siteswap</span>(<span class="st">"423"</span>)</span>
+<span id="cb1-3"><a href=""></a>ss423</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ '423' is valid vanilla siteswap</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ It uses 3 props</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ It is symmetrical with period 3</code></pre>
+</div>
+</div>
+</section>
+<section id="create-and-validate-unjuggleable-siteswap" class="slide level2">
+<h2>Create and validate (unjuggleable) siteswap</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>ss432 <span class="ot">&lt;-</span> <span class="fu">siteswap</span>(<span class="st">"432"</span>)</span>
+<span id="cb5-2"><a href=""></a>ss432</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✖ '432' is not a valid juggling pattern</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ Two or more throws land on the same beat (collision)</code></pre>
+</div>
+</div>
+</section>
+<section id="visualise-with-timeline" class="slide level2">
+<h2>Visualise with <code>timeline</code></h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">timeline</span>(ss423)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section id="visualise-with-timeline-1" class="slide level2">
+<h2>Visualise with <code>timeline</code></h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">timeline</span>(ss432)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+<section id="visualise-with-ladder" class="slide level2">
+<h2>Visualise with <code>ladder</code></h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">ladder</span>(ss423)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<section id="visualise-with-ladder-1" class="slide level2">
+<h2>Visualise with <code>ladder</code></h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">ladder</span>(ss432)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<section id="animations" class="slide level2">
+<h2>Animations</h2>
+<p>A wrapper to the <a href="https://jugglinglab.org/html/animinfo.html">JugglingLab GIF server</a>.</p>
+<p>In RStudio/Positron, by default the GIF will be displayed in the Viewer pane. Set a <code>path</code> to save the file.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">animate</span>(</span>
+<span id="cb12-2"><a href=""></a>  ss423,</span>
+<span id="cb12-3"><a href=""></a>  <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"#F02BC2"</span>, <span class="st">"#00BAE4"</span>, <span class="st">"#3AD531"</span>),</span>
+<span id="cb12-4"><a href=""></a>  <span class="at">path =</span> <span class="st">"images/423.gif"</span></span>
+<span id="cb12-5"><a href=""></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section></section>
+<section>
+<section id="s7" class="title-slide slide level1 inverse center-h larger200 center">
+<h1>S7</h1>
+
+</section>
+<section id="slides-about-objectsclassesmethodsgenerics" class="slide level2">
+<h2>Slide(s) about objects/classes/methods/generics?</h2>
+</section>
+<section id="class-structure" class="slide level2">
+<h2>Class structure</h2>
+<pre><code>Siteswap  
+├── vanillaSiteswap
+├── synchronousSiteswap
+├── multiplexSiteswap
+├── synchronousMultiplexSiteswap
+└── passingSiteswap</code></pre>
+<div class="fragment">
+<p><br></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">class</span>(ss423)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "jugglr::vanillaSiteswap" "jugglr::Siteswap"       
+[3] "S7_object"              </code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="helper-to-assign-correct-class" class="slide level2">
+<h2>Helper to assign correct class</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a>siteswap <span class="ot">&lt;-</span> <span class="cf">function</span>(sequence) {</span>
+<span id="cb16-2"><a href=""></a>  <span class="cf">if</span> (<span class="fu">is_vanilla_notation</span>(sequence)) {</span>
+<span id="cb16-3"><a href=""></a>    <span class="fu">vanillaSiteswap</span>(sequence)</span>
+<span id="cb16-4"><a href=""></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">is_sync_notation</span>(sequence)) {</span>
+<span id="cb16-5"><a href=""></a>    <span class="fu">synchronousSiteswap</span>(sequence)</span>
+<span id="cb16-6"><a href=""></a>    ...</span>
+<span id="cb16-7"><a href=""></a>  } <span class="cf">else</span> {</span>
+<span id="cb16-8"><a href=""></a>    cli<span class="sc">::</span><span class="fu">cli_abort</span>(</span>
+<span id="cb16-9"><a href=""></a>      <span class="st">"Not valid vanilla, synchronous,..., siteswap notation."</span>,</span>
+<span id="cb16-10"><a href=""></a>      <span class="at">class =</span> <span class="st">"jugglr_error_not_valid_siteswap"</span></span>
+<span id="cb16-11"><a href=""></a>    )</span>
+<span id="cb16-12"><a href=""></a>  }</span>
+<span id="cb16-13"><a href=""></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="siteswap-1" class="slide level2">
+<h2><code>Siteswap</code></h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>Siteswap <span class="ot">&lt;-</span> <span class="fu">new_class</span>(</span>
+<span id="cb17-2"><a href=""></a>  <span class="st">"Siteswap"</span>,</span>
+<span id="cb17-3"><a href=""></a>  <span class="at">properties =</span> <span class="fu">list</span>(</span>
+<span id="cb17-4"><a href=""></a>    <span class="at">sequence =</span> class_character</span>
+<span id="cb17-5"><a href=""></a>  )</span>
+<span id="cb17-6"><a href=""></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="siteswap-with-property-validator" class="slide level2">
+<h2><code>Siteswap</code> with property validator</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18" data-code-line-numbers="4-11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a>Siteswap <span class="ot">&lt;-</span> <span class="fu">new_class</span>(</span>
+<span id="cb18-2"><a href=""></a>  <span class="st">"Siteswap"</span>,</span>
+<span id="cb18-3"><a href=""></a>  <span class="at">properties =</span> <span class="fu">list</span>(</span>
+<span id="cb18-4"><a href=""></a>    <span class="at">sequence =</span> <span class="fu">new_property</span>(</span>
+<span id="cb18-5"><a href=""></a>      <span class="at">class =</span> class_character,</span>
+<span id="cb18-6"><a href=""></a>      <span class="at">validator =</span> <span class="cf">function</span>(value) {</span>
+<span id="cb18-7"><a href=""></a>        <span class="cf">if</span> (<span class="fu">length</span>(value) <span class="sc">!=</span> <span class="dv">1</span>) {</span>
+<span id="cb18-8"><a href=""></a>          <span class="st">"must be length 1"</span></span>
+<span id="cb18-9"><a href=""></a>        }</span>
+<span id="cb18-10"><a href=""></a>      }</span>
+<span id="cb18-11"><a href=""></a>    )</span>
+<span id="cb18-12"><a href=""></a>  )</span>
+<span id="cb18-13"><a href=""></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="validation-in-practice" class="slide level2">
+<h2>Validation in practice</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a><span class="fu">Siteswap</span>(<span class="st">"423"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Siteswap&gt;
+ @ sequence: chr "423"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="fu">Siteswap</span>(<span class="dv">423</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error:
+! &lt;Siteswap&gt; object properties are invalid:
+- @sequence must be &lt;character&gt;, not &lt;double&gt;</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">Siteswap</span>(<span class="fu">c</span>(<span class="st">"423"</span>, <span class="st">"3"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error:
+! &lt;Siteswap&gt; object properties are invalid:
+- @sequence must be length 1</code></pre>
+</div>
+</div>
+</section>
+<section id="vanillasiteswap-with-computed-properties-and-class-validator" class="slide level2">
+<h2><code>vanillaSiteswap</code> with computed properties and class validator</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25" data-code-line-numbers="1-3|4-9|10-15|16-21|23-27|28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a>vanillaSiteswap <span class="ot">&lt;-</span> <span class="fu">new_class</span>(</span>
+<span id="cb25-2"><a href=""></a>  <span class="st">"vanillaSiteswap"</span>,</span>
+<span id="cb25-3"><a href=""></a>  <span class="at">properties =</span> <span class="fu">list</span>(</span>
+<span id="cb25-4"><a href=""></a>    <span class="at">throws =</span> <span class="fu">new_property</span>(</span>
+<span id="cb25-5"><a href=""></a>      <span class="at">class =</span> class_integer,</span>
+<span id="cb25-6"><a href=""></a>      <span class="at">getter =</span> <span class="cf">function</span>(self) {</span>
+<span id="cb25-7"><a href=""></a>        <span class="fu">get_throws</span>(self<span class="sc">@</span>sequence) <span class="co"># e.g. "423" -&gt; c(4, 2, 3)</span></span>
+<span id="cb25-8"><a href=""></a>      }</span>
+<span id="cb25-9"><a href=""></a>    ),</span>
+<span id="cb25-10"><a href=""></a>    <span class="at">n_props =</span> <span class="fu">new_property</span>(</span>
+<span id="cb25-11"><a href=""></a>      <span class="at">class =</span> class_numeric,</span>
+<span id="cb25-12"><a href=""></a>      <span class="at">getter =</span> <span class="cf">function</span>(self) {</span>
+<span id="cb25-13"><a href=""></a>        <span class="fu">mean</span>(self<span class="sc">@</span>throws)</span>
+<span id="cb25-14"><a href=""></a>      }</span>
+<span id="cb25-15"><a href=""></a>    ),</span>
+<span id="cb25-16"><a href=""></a>    <span class="at">valid =</span> <span class="fu">new_property</span>(</span>
+<span id="cb25-17"><a href=""></a>      <span class="at">class =</span> class_logical,</span>
+<span id="cb25-18"><a href=""></a>      <span class="at">getter =</span> <span class="cf">function</span>(self) {</span>
+<span id="cb25-19"><a href=""></a>        <span class="fu">can_throw</span>(self<span class="sc">@</span>throws) <span class="sc">&amp;&amp;</span> <span class="fu">is_whole_number</span>(self<span class="sc">@</span>n_props)</span>
+<span id="cb25-20"><a href=""></a>      }</span>
+<span id="cb25-21"><a href=""></a>    )</span>
+<span id="cb25-22"><a href=""></a>  ),</span>
+<span id="cb25-23"><a href=""></a>  <span class="at">validator =</span> <span class="cf">function</span>(self) {</span>
+<span id="cb25-24"><a href=""></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is_vanilla_notation</span>(self<span class="sc">@</span>sequence)) {</span>
+<span id="cb25-25"><a href=""></a>      <span class="st">"@sequence must only contain digits and letters."</span></span>
+<span id="cb25-26"><a href=""></a>    }</span>
+<span id="cb25-27"><a href=""></a>  },</span>
+<span id="cb25-28"><a href=""></a>  <span class="at">parent =</span> Siteswap</span>
+<span id="cb25-29"><a href=""></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="vanillasiteswap" class="slide level2">
+<h2>vanillaSiteswap</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="fu">vanillaSiteswap</span>(<span class="st">"423"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;vanillaSiteswap&gt;
+ @ sequence: chr "423"
+ @ throws  : num [1:3] 4 2 3
+ @ n_props : num 3
+ @ valid   : logi TRUE</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>This is the simplied version of the <code>vanillaSiteswap</code> class as defined in the slide.</p>
+<p>The full version in the jugglr package has additional properties and a print method (seen earlier!)</p>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="s7-in-packages" class="title-slide slide level1 inverse center-h larger200 center">
+<h1>S7 in packages</h1>
+
+</section>
+<section id="abstract-class-package" class="slide level2">
+<h2>Abstract class, package</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28" data-code-line-numbers="6-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a>Siteswap <span class="ot">&lt;-</span> <span class="fu">new_class</span>(</span>
+<span id="cb28-2"><a href=""></a>  <span class="st">"Siteswap"</span>,</span>
+<span id="cb28-3"><a href=""></a>  <span class="at">properties =</span> <span class="fu">list</span>(</span>
+<span id="cb28-4"><a href=""></a>    ...</span>
+<span id="cb28-5"><a href=""></a>  )</span>
+<span id="cb28-6"><a href=""></a>  <span class="at">abstract =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb28-7"><a href=""></a>  <span class="at">package =</span> <span class="st">"jugglr"</span></span>
+<span id="cb28-8"><a href=""></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="documentation" class="slide level2">
+<h2>Documentation</h2>
+<p>roxygen2 8.0.0 provides <a href="https://roxygen2.r-lib.org/articles/rd-S7.html">first-class support for S7</a>.</p>
+<p>In DESCRIPTION:</p>
+<pre><code>Config/roxygen2/version: 8.0.0
+Config/roxygen2/markdown: TRUE</code></pre>
+</section>
+<section id="what-to-document" class="slide level2">
+<h2>What to document</h2>
+<ul>
+<li><strong>generics</strong>: document as functions</li>
+<li><strong>methods</strong>:</li>
+</ul>
 </section></section>
 <section>
 <section id="slide-templates" class="title-slide slide level1 inverse center">
@@ -376,22 +664,22 @@ Ella Kaye
 <section id="syntax-highlighting" class="slide level2">
 <h2>Syntax highlighting</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-2"><a href=""></a></span>
-<span id="cb1-3"><a href=""></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb1-4"><a href=""></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-5"><a href=""></a>    <span class="at">long_flipper =</span> <span class="fu">case_when</span>(</span>
-<span id="cb1-6"><a href=""></a>      species <span class="sc">==</span> <span class="st">"Adelie"</span> <span class="sc">&amp;</span> flipper_len <span class="sc">&gt;</span> <span class="dv">195</span> <span class="sc">~</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1-7"><a href=""></a>      species <span class="sc">==</span> <span class="st">"Chinstrap"</span> <span class="sc">&amp;</span> flipper_len <span class="sc">&gt;</span> <span class="dv">200</span> <span class="sc">~</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1-8"><a href=""></a>      species <span class="sc">==</span> <span class="st">"Gentoo"</span> <span class="sc">&amp;</span> flipper_len <span class="sc">&gt;</span> <span class="dv">225</span> <span class="sc">~</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1-9"><a href=""></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">FALSE</span></span>
-<span id="cb1-10"><a href=""></a>    )</span>
-<span id="cb1-11"><a href=""></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb1-12"><a href=""></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-13"><a href=""></a>    <span class="at">body_mass_kg =</span> body_mass <span class="sc">/</span> <span class="dv">1000</span>,</span>
-<span id="cb1-14"><a href=""></a>    <span class="at">bill_len_cm =</span> bill_len <span class="sc">/</span> <span class="dv">10</span>,</span>
-<span id="cb1-15"><a href=""></a>    <span class="at">bill_dep_cm =</span> bill_dep <span class="sc">/</span> <span class="dv">10</span></span>
-<span id="cb1-16"><a href=""></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb30-2"><a href=""></a></span>
+<span id="cb30-3"><a href=""></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb30-4"><a href=""></a>  <span class="fu">mutate</span>(</span>
+<span id="cb30-5"><a href=""></a>    <span class="at">long_flipper =</span> <span class="fu">case_when</span>(</span>
+<span id="cb30-6"><a href=""></a>      species <span class="sc">==</span> <span class="st">"Adelie"</span> <span class="sc">&amp;</span> flipper_len <span class="sc">&gt;</span> <span class="dv">195</span> <span class="sc">~</span> <span class="cn">TRUE</span>,</span>
+<span id="cb30-7"><a href=""></a>      species <span class="sc">==</span> <span class="st">"Chinstrap"</span> <span class="sc">&amp;</span> flipper_len <span class="sc">&gt;</span> <span class="dv">200</span> <span class="sc">~</span> <span class="cn">TRUE</span>,</span>
+<span id="cb30-8"><a href=""></a>      species <span class="sc">==</span> <span class="st">"Gentoo"</span> <span class="sc">&amp;</span> flipper_len <span class="sc">&gt;</span> <span class="dv">225</span> <span class="sc">~</span> <span class="cn">TRUE</span>,</span>
+<span id="cb30-9"><a href=""></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">FALSE</span></span>
+<span id="cb30-10"><a href=""></a>    )</span>
+<span id="cb30-11"><a href=""></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb30-12"><a href=""></a>  <span class="fu">mutate</span>(</span>
+<span id="cb30-13"><a href=""></a>    <span class="at">body_mass_kg =</span> body_mass <span class="sc">/</span> <span class="dv">1000</span>,</span>
+<span id="cb30-14"><a href=""></a>    <span class="at">bill_len_cm =</span> bill_len <span class="sc">/</span> <span class="dv">10</span>,</span>
+<span id="cb30-15"><a href=""></a>    <span class="at">bill_dep_cm =</span> bill_dep <span class="sc">/</span> <span class="dv">10</span></span>
+<span id="cb30-16"><a href=""></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section></section>
