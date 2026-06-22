@@ -1,7 +1,7 @@
 ---
 title: Juggling with S7
 author: Ella Kaye
-date: 2026-06-09
+date: 2026-06-23
 date-format: long
 execute:
   echo: true
@@ -315,6 +315,71 @@ ss423@n_props <- 4
 
 # S7 in packages {.inverse .center-h .larger200}
 
+::: {.notes}
+85 out of 24,000 packages import S7 (0.35%) 
+
+ggplot2, ellmer
+:::
+
+## Importing S7 and its functions
+
+`DESCRIPTION`:
+
+```
+Imports: S7
+```
+
+`jugglr-package.R`:
+
+```{r}
+#| eval: false
+#' @import S7
+NULL
+```
+
+## Registering methods: don't `@export`!
+
+:::: {.columms}
+
+::: {.column width="45%"}
+### Release (0.2.2)
+in any `.R` file:
+
+```{r}
+#| eval: false
+.onLoad <- function(...) {
+  methods_register()
+}
+```
+
+:::
+
+:::{.column width="10%"}
+:::
+
+::: {.column width="45%"}
+### Dev (0.2.2.9000)
+in `zzz.R`:
+
+```{r}
+#| eval: false
+.onLoad <- function(...) {
+  S7::S7_on_load()
+}
+
+.onUnload <- function(...) {
+  S7::S7_on_unload()
+}
+
+S7::S7_on_build()
+```
+:::
+::::
+
+:::{.notes}
+Unlike S3/S4, S7 method dispatch is not wired through NAMESPACE — it registers at load time. Without this, methods silently don't dispatch.
+:::
+
 ## Package name in all classes
 
 ```{r}
@@ -345,6 +410,30 @@ Config/roxygen2/markdown: TRUE
 - **Generics**: mention that the function is a generic and list the available methods.
 - **Methods**: link back to the generic; only document individually when the method has unique behavior or arguments.
 - **Classes**: document the constructor - `@param` for constructor arguments, `@prop` for additional (e.g. read-only computed) properties. 
+
+## Subclasses must be defined after parent class
+
+In `vanillaSiteswap.R`:
+
+```{r}
+#| eval: false
+#' @include siteswap.R
+#' @include utils.R
+NULL
+```
+
+This generates `DESCRIPTION` field:
+
+```
+Collate:
+    'utils.R'
+    'siteswap.R'
+    'vanillaSiteswap.R'
+```
+
+# Key takeaways {.inverse .center-h .larger200}
+
+# An awesome last slide {.inverse .center-h .larger200}
 
 # Slide templates {.inverse}
 
