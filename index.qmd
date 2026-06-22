@@ -6,12 +6,14 @@ date-format: long
 execute:
   echo: true
   eval: true
-format: 
-  revealjs: 
-    theme: jugglr.scss
-    syntax-highlighting: jugglr.theme
-    width: 1280
-    height: 720
+format:
+  ellakayepres-revealjs: default
+#format: 
+#  revealjs: 
+#    theme: jugglr.scss
+#    syntax-highlighting: jugglr.theme
+#    width: 1280
+#    height: 720
 ---
 
 ## {background-image="images/learning.png" background-size="contain"}
@@ -38,7 +40,7 @@ knitr::opts_chunk$set(message = TRUE)
 
 ## [3]{.larger250 .dark} {background-image="images/3.gif" background-size="33%" background-position="50% 80%"}
 
-## [4]{.larger250 .dark} {background-image="images/4-cols.gif" background-size="33%" background-position="50% 80%"}
+## [4]{.larger250 .dark} {background-image="images/4.gif" background-size="33%" background-position="50% 80%"}
 
 ## [423]{.larger250 .dark} {background-image="images/423.gif" background-size="33%" background-position="50% 80%"}
 
@@ -46,13 +48,19 @@ knitr::opts_chunk$set(message = TRUE)
 
 ## [(4x,4x)]{.larger250 .dark} {background-image="images/4x4x.gif" background-size="33%" background-position="50% 80%"}
 
-## [[43]14]{.larger250 .dark} {background-image="images/4314.gif" background-size="33%" background-position="50% 80%"}
+## [(4,4)(4x,4x)]{.larger250 .dark} {background-image="images/44x.gif" background-size="33%" background-position="50% 80%"}
+
+## [[54]24]{.larger250 .dark} {background-image="images/54_24.gif" background-size="33%" background-position="50% 80%"}
 
 ## [(2,6x)([6x4x],2x)]{.larger250 .dark} {background-image="images/sync_multi.gif" background-size="33%" background-position="50% 80%"}
 
 ## [<3p|3p>]{.larger250 .dark} {background-image="images/3p.gif" background-size="33%" background-position="50% 80%"}
 
-# {background-image="images/jugglr.png" background-size="contain"}
+# {.center-h}
+
+![](images/jugglr.png)
+
+[**ellakaye.github.io/jugglr**](https://ellakaye.github.io/jugglr){.larger200}
 
 ## Create and validate (juggleable) siteswap
 
@@ -60,6 +68,14 @@ knitr::opts_chunk$set(message = TRUE)
 library(jugglr)
 ss423 <- siteswap("423")
 ss423
+```
+
+
+## Create and validate (juggleable) siteswap
+
+```{r}
+ss444x4x <- siteswap("(4,4)(4x,4x)")
+ss444x4x
 ```
 
 ## Create and validate (unjuggleable) siteswap
@@ -75,10 +91,16 @@ ss432
 timeline(ss423)
 ```
 
-## Visualise with `timeline`
+## Visualise with `timeline`: vanilla
 
 ```{r}
 timeline(ss432)
+```
+
+## Visualise with `timeline`: synchronous
+
+```{r}
+timeline(ss444x4x)
 ```
 
 ## Visualise with `ladder`
@@ -93,19 +115,50 @@ ladder(ss423)
 ladder(ss432)
 ```
 
+## Visualise with `ladder`
+
+```{r}
+ladder(ss444x4x)
+```
+
+## Animations
+
+A wrapper to the [JugglingLab GIF server](https://jugglinglab.org/html/animinfo.html).
+
+In RStudio/Positron, by default the GIF will be displayed in the Viewer pane. Set a `path` to save the file.
+
+```{r}
+#| eval: false
+animate(
+  ss423,
+  colors = c("#D4006A", "#006AD4", "#00D46A"),
+  path = "images/423.gif"
+)
+```
+
 # S7 {.inverse .center-h .larger200}
 
 ## Slide(s) about objects/classes/methods/generics?
 
 ## Class structure
 
-![](images/jugglr-classes.png){fig-align="center"}
+```
+Siteswap  
+├── vanillaSiteswap
+├── synchronousSiteswap
+├── multiplexSiteswap
+├── synchronousMultiplexSiteswap
+└── passingSiteswap
+```
 
-## `Siteswap`
+. . .
 
+<br>
 
+```{r}
+class(ss423)
+```
 
-## `vanillaSiteswap`
 
 ## Helper to assign correct class
 
@@ -117,24 +170,181 @@ siteswap <- function(sequence) {
     vanillaSiteswap(sequence)
   } else if (is_sync_notation(sequence)) {
     synchronousSiteswap(sequence)
-  ...
+    ...
   } else {
     cli::cli_abort(
-      "Not valid vanilla, synchronous, multiplex, synchronous multiplex, or passing siteswap notation.",
+      "Not valid vanilla, synchronous,..., siteswap notation.",
       class = "jugglr_error_not_valid_siteswap"
     )
   }
 }
 ```
 
-## Classes and inheritance
+## `Siteswap`
+
 ```{r}
-class(ss423)
+#| echo: false
+library(S7)
 ```
 
 ```{r}
+Siteswap <- new_class(
+  "Siteswap",
+  properties = list(
+    sequence = class_character
+  )
+)
+```
+
+. . .
+
+In S7 v0.2.2.9000, named bindings:
+
+```{r}
+#| eval: false
+Siteswap := new_class(
+  properties = list(...)
+)
+```
+
+## `Siteswap` with property validator
+
+```{r}
+#| code-line-numbers: 4-11
+Siteswap <- new_class(
+  "Siteswap",
+  properties = list(
+    sequence = new_property(
+      class = class_character,
+      validator = function(value) {
+        if (length(value) != 1) {
+          "must be length 1"
+        }
+      }
+    )
+  )
+)
+```
+
+
+## Validation in practice
+
+```{r}
+#| error: true
+Siteswap("423")
+Siteswap(423)
+Siteswap(c("423", "3"))
+```
+
+## `vanillaSiteswap` with computed properties and class validator
+
+```{r}
+#| echo: false
+chr_throws_to_num <- function(throws) {
+  match(tolower(throws), c(0:9, letters)) - 1
+}
+
+get_throws <- function(sequence) {
+  throws_chr <- strsplit(sequence, "") |>
+    unlist()
+
+  chr_throws_to_num(throws_chr)
+}
+
+can_throw <- function(throws) {
+  n <- length(throws)
+  lands <- ((seq_len(n) - 1) + throws) %% n
+  anyDuplicated(lands) == 0
+}
+
+is_whole_number <- function(x) {
+  x %% 1 == 0
+}
+
+is_vanilla_notation <- function(sequence) {
+  stringr::str_detect(sequence, "^[a-zA-Z0-9]+$")
+}
+```
+
+```{r}
+#| code-line-numbers: 1-3|4-10|11-16|17-22|23-28
+vanillaSiteswap <- new_class(
+  "vanillaSiteswap",
+  parent = Siteswap,
+  properties = list(
+    throws = new_property(
+      class = class_integer,
+      getter = function(self) {
+        get_throws(self@sequence) # e.g. "423" -> c(4, 2, 3)
+      }
+    ),
+    n_props = new_property(
+      class = class_numeric,
+      getter = function(self) {
+        mean(self@throws)
+      }
+    ),
+    valid = new_property(
+      class = class_logical,
+      getter = function(self) {
+        can_throw(self@throws) && is_whole_number(self@n_props)
+      }
+    )
+  ),
+  validator = function(self) {
+    if (!is_vanilla_notation(self@sequence)) {
+      "@sequence must only contain digits and letters."
+    }
+  }
+)
+```
+
+## vanillaSiteswap
+
+```{r}
+ss423 <- vanillaSiteswap("423")
+ss423
+```
+
+. . .
+
+```{r}
+#| error: true
+ss423@n_props <- 4
+```
+
+# S7 in packages {.inverse .center-h .larger200}
+
+## Package name in all classes
+
+```{r}
+#| eval: false
+#| code-line-numbers: "1,6"
+Siteswap <- new_class(
+  "Siteswap",
+  properties = list(
+    ...
+  )
+  package = "jugglr"
+)
+```
+
+## Documentation
+
+roxygen2 8.0.0 provides [first-class support for S7](https://roxygen2.r-lib.org/articles/rd-S7.html).
+
+In DESCRIPTION:
 
 ```
+Config/roxygen2/version: 8.0.0
+Config/roxygen2/markdown: TRUE
+```
+
+## What to document
+
+- **Generics**: mention that the function is a generic and list the available methods.
+- **Methods**: link back to the generic; only document individually when the method has unique behavior or arguments.
+- **Classes**: document the constructor - `@param` for constructor arguments, `@prop` for additional (e.g. read-only computed) properties. 
 
 # Slide templates {.inverse}
 
