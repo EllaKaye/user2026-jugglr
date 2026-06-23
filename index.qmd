@@ -57,90 +57,22 @@ knitr::opts_chunk$set(message = TRUE)
 
 ## [<3p|3p>]{.larger250 .dark} {background-image="images/3p.gif" background-size="33%" background-position="50% 80%"}
 
-# {.center-h}
+## Siteswap variations
 
-![](images/jugglr.png)
+- vanilla: **423**
+- synchronous: **(4,4)(4x,4x)**
+- multiplex: **[54]24**
+- synchronous multiplex: **[(2,6x)([6x4x],2x)]**
+- passing: **<3p|3p>** or **<4.5 3 3 | 3 4 3.5>**
 
-[**ellakaye.github.io/jugglr**](https://ellakaye.github.io/jugglr){.larger200}
-
-## Create and validate (juggleable) siteswap
-
-```{r}
-library(jugglr)
-ss423 <- siteswap("423")
-ss423
-```
-
-
-## Create and validate (juggleable) siteswap
-
-```{r}
-ss444x4x <- siteswap("(4,4)(4x,4x)")
-ss444x4x
-```
-
-## Create and validate (unjuggleable) siteswap
-
-```{r}
-ss432 <- siteswap("432")
-ss432
-```
-
-## Visualise with `timeline`
-
-```{r}
-timeline(ss423)
-```
-
-## Visualise with `timeline`
-
-```{r}
-timeline(ss432)
-```
-
-## Visualise with `timeline`
-
-```{r}
-timeline(ss444x4x)
-```
-
-## Visualise with `ladder`
-
-```{r}
-ladder(ss423)
-```
-
-## Visualise with `ladder`
-
-```{r}
-ladder(ss432)
-```
-
-## Visualise with `ladder`
-
-```{r}
-ladder(ss444x4x)
-```
-
-## Animations
-
-A wrapper to the [JugglingLab GIF server](https://jugglinglab.org/html/animinfo.html).
-
-In RStudio/Positron, by default the GIF will be displayed in the Viewer pane. Set a `path` to save the file.
-
-```{r}
-#| eval: false
-animate(
-  ss423,
-  colors = c("#D4006A", "#006AD4", "#00D46A"),
-  path = "images/423.gif"
-)
-```
+:::{.notes}
+Varies both in notation and in assumptions about how/when the props are thrown amd caught
+:::
 
 # S7 {.inverse .center-h .larger200}
 
 :::{.notes}
-OOP, combines best of S3 and S4, whilst attempting to avoid hte pitfalls of each
+OOP, combines best of S3 and S4, whilst attempting to avoid the pitfalls of each
 :::
 
 ## {.center-h .larger250 .center}
@@ -159,7 +91,25 @@ OOP, combines best of S3 and S4, whilst attempting to avoid hte pitfalls of each
 
 [method]{.orange}
 
-## Class structure
+## S3 example: `data.frame` {.smaller80}
+
+```{r}
+head(penguins, 3)
+```
+
+. . .
+
+```{r}
+c(class(penguins), class(penguins$species), class(penguins$bill_dep))
+```
+
+. . .
+
+```{r}
+summary(penguins[c("species", "bill_len")])
+```
+
+## Class hierarchy
 
 ```
 Siteswap  
@@ -175,6 +125,8 @@ Siteswap
 <br>
 
 ```{r}
+library(jugglr)
+ss423 <- siteswap("423")
 class(ss423)
 ```
 
@@ -182,7 +134,7 @@ class(ss423)
 :::{.notes}
 ss423 gets parent class and S7
 
-Recall `siteswap` rather than class constructor.
+`siteswap` rather than class constructor - will come back to this
 :::
 
 ## Helper to assign correct class
@@ -218,16 +170,6 @@ Siteswap <- new_class(
 )
 ```
 
-. . .
-
-In S7 v0.2.2.9000, named bindings:
-
-```{r}
-#| eval: false
-Siteswap := new_class(
-  properties = list(...)
-)
-```
 
 :::{.notes}
 Building simplified versions of `Siteswap` and `vanillaSiteswap` class in these slides.
@@ -356,9 +298,11 @@ Note no print method!
 85 out of 24,000 packages import S7 (0.35%) 
 
 ggplot2, ellmer
+
+esp where different from S3/S4
 :::
 
-## Importing S7 and its functions
+## Importing S7 and its functions {visibility="hidden"}
 
 `DESCRIPTION`:
 
@@ -376,11 +320,7 @@ NULL
 
 ## Registering methods: don't `@export`!
 
-:::: {.columms}
-
-::: {.column width="45%"}
-### Release (0.2.2)
-in any `.R` file:
+in any `.R` file (in S7 v0.2.2):
 
 ```{r}
 #| eval: false
@@ -389,34 +329,13 @@ in any `.R` file:
 }
 ```
 
-:::
-
-:::{.column width="10%"}
-:::
-
-::: {.column width="45%"}
-### Dev (0.2.2.9000)
-in `zzz.R`:
-
-```{r}
-#| eval: false
-.onLoad <- function(...) {
-  S7::S7_on_load()
-}
-
-.onUnload <- function(...) {
-  S7::S7_on_unload()
-}
-
-S7::S7_on_build()
-```
-:::
-::::
 
 :::{.notes}
 Unlike S3/S4, S7 method dispatch is not wired through NAMESPACE — it registers at load time. Without this, methods silently don't dispatch.
 
 zzz.R because it loads last (S7_on_build needs to be called after methods have been registered)
+
+The way this is done is changed in the S7 devel version
 :::
 
 ## Package name in all classes
@@ -481,6 +400,87 @@ The order in which files are loaded matters
 
 Alphabetical unless told otherwise with `Collate`
 :::
+
+# {.center-h}
+
+![](images/jugglr.png)
+
+[**ellakaye.github.io/jugglr**](https://ellakaye.github.io/jugglr){.larger200}
+
+## Create and validate (juggleable) siteswap
+
+```{r}
+library(jugglr)
+ss423 <- siteswap("423")
+ss423
+```
+
+
+## Create and validate (juggleable) siteswap
+
+```{r}
+ss444x4x <- siteswap("(4,4)(4x,4x)")
+ss444x4x
+```
+
+## Create and validate (unjuggleable) siteswap
+
+```{r}
+ss432 <- siteswap("432")
+ss432
+```
+
+## Visualise with `timeline`
+
+```{r}
+timeline(ss423)
+```
+
+## Visualise with `timeline`
+
+```{r}
+timeline(ss432)
+```
+
+## Visualise with `timeline`
+
+```{r}
+timeline(ss444x4x)
+```
+
+## Visualise with `ladder`
+
+```{r}
+ladder(ss423)
+```
+
+## Visualise with `ladder` {visibility="hidden"}
+
+```{r}
+ladder(ss432)
+```
+
+## Visualise with `ladder` {visibility="hidden"}
+
+```{r}
+ladder(ss444x4x)
+```
+
+## Animations
+
+A wrapper to the [JugglingLab GIF server](https://jugglinglab.org/html/animinfo.html).
+
+In RStudio/Positron, by default the GIF will be displayed in the Viewer pane. Set a `path` to save the file.
+
+```{r}
+#| eval: false
+animate(
+  ss423,
+  colors = c("#D4006A", "#006AD4", "#00D46A"),
+  path = "images/423.gif"
+)
+```
+
 
 # Key takeaway {.inverse .center-h .larger200}
 
