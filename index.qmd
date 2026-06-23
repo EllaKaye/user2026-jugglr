@@ -7,7 +7,8 @@ execute:
   echo: true
   eval: true
 format:
-  ellakayepres-revealjs: default
+  ellakayepres-revealjs: 
+    slide-number: false
 #format: 
 #  revealjs: 
 #    theme: jugglr.scss
@@ -177,6 +178,12 @@ Siteswap
 class(ss423)
 ```
 
+
+:::{.notes}
+ss423 gets parent class and S7
+
+Recall `siteswap` rather than class constructor.
+:::
 
 ## Helper to assign correct class
 
@@ -439,12 +446,15 @@ Config/roxygen2/markdown: TRUE
 
 ## What to document
 
+:::{.incremental}
 - **Generics**: mention that the function is a generic and list the available methods.
+  - `doclistling::methods_list()`
 - **Methods**: link back to the generic; only document individually when the method has unique behavior or arguments.
 - **Classes**: document the constructor 
   - `@param` for constructor arguments
   - `@prop` for additional (e.g. read-only computed) properties
   - `@export`
+:::
 
 ## Subclasses must be defined after parent class
 
@@ -472,6 +482,12 @@ The order in which files are loaded matters
 Alphabetical unless told otherwise with `Collate`
 :::
 
-# Key takeaways {.inverse .center-h .larger200}
+# Key takeaway {.inverse .center-h .larger200}
+
+## {background-image="images/juggling-end.png" background-size="contain"}
+
+## {background-image="images/S7-end.png" background-size="contain"}
+
+## {background-image="images/jugglr-takeaway.png" background-size="contain"}
 
 # An awesome last slide {.inverse .center-h .larger200}
