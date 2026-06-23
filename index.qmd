@@ -91,13 +91,13 @@ ss432
 timeline(ss423)
 ```
 
-## Visualise with `timeline`: vanilla
+## Visualise with `timeline`
 
 ```{r}
 timeline(ss432)
 ```
 
-## Visualise with `timeline`: synchronous
+## Visualise with `timeline`
 
 ```{r}
 timeline(ss444x4x)
@@ -138,7 +138,25 @@ animate(
 
 # S7 {.inverse .center-h .larger200}
 
-## Slide(s) about objects/classes/methods/generics?
+:::{.notes}
+OOP, combines best of S3 and S4, whilst attempting to avoid hte pitfalls of each
+:::
+
+## {.center-h .larger250 .center}
+
+[object]{.pink}
+
+. . .
+
+[class]{.blue}
+
+. . .
+
+[generic]{.purple}
+
+. . .
+
+[method]{.orange}
 
 ## Class structure
 
@@ -165,6 +183,7 @@ class(ss423)
 ```{r}
 #| eval: false
 #| label: siteswap-fn
+#| code-line-numbers: "1-13|2-3|4-7"
 siteswap <- function(sequence) {
   if (is_vanilla_notation(sequence)) {
     vanillaSiteswap(sequence)
@@ -183,11 +202,7 @@ siteswap <- function(sequence) {
 ## `Siteswap`
 
 ```{r}
-#| echo: false
 library(S7)
-```
-
-```{r}
 Siteswap <- new_class(
   "Siteswap",
   properties = list(
@@ -206,6 +221,13 @@ Siteswap := new_class(
   properties = list(...)
 )
 ```
+
+:::{.notes}
+Building simplified versions of `Siteswap` and `vanillaSiteswap` class in these slides.
+The versions in jugglr have more properties and defined,
+as well as methods and generics.
+
+:::
 
 ## `Siteswap` with property validator
 
@@ -299,6 +321,10 @@ vanillaSiteswap <- new_class(
 )
 ```
 
+:::{.notes}
+Can use ealier defined properties in later prop definitions
+:::
+
 ## vanillaSiteswap
 
 ```{r}
@@ -312,6 +338,10 @@ ss423
 #| error: true
 ss423@n_props <- 4
 ```
+
+:::{.notes}
+Note no print method!
+:::
 
 # S7 in packages {.inverse .center-h .larger200}
 
@@ -378,6 +408,8 @@ S7::S7_on_build()
 
 :::{.notes}
 Unlike S3/S4, S7 method dispatch is not wired through NAMESPACE — it registers at load time. Without this, methods silently don't dispatch.
+
+zzz.R because it loads last (S7_on_build needs to be called after methods have been registered)
 :::
 
 ## Package name in all classes
@@ -398,7 +430,7 @@ Siteswap <- new_class(
 
 roxygen2 8.0.0 provides [first-class support for S7](https://roxygen2.r-lib.org/articles/rd-S7.html).
 
-In DESCRIPTION:
+In `DESCRIPTION`:
 
 ```
 Config/roxygen2/version: 8.0.0
@@ -409,7 +441,10 @@ Config/roxygen2/markdown: TRUE
 
 - **Generics**: mention that the function is a generic and list the available methods.
 - **Methods**: link back to the generic; only document individually when the method has unique behavior or arguments.
-- **Classes**: document the constructor - `@param` for constructor arguments, `@prop` for additional (e.g. read-only computed) properties. 
+- **Classes**: document the constructor 
+  - `@param` for constructor arguments
+  - `@prop` for additional (e.g. read-only computed) properties
+  - `@export`
 
 ## Subclasses must be defined after parent class
 
@@ -431,156 +466,12 @@ Collate:
     'vanillaSiteswap.R'
 ```
 
+:::{.notes}
+The order in which files are loaded matters
+
+Alphabetical unless told otherwise with `Collate`
+:::
+
 # Key takeaways {.inverse .center-h .larger200}
 
 # An awesome last slide {.inverse .center-h .larger200}
-
-# Slide templates {.inverse}
-
-## Colours
-
-Colour classes for text and highlights:
-
-:::: {.columns}
-::: {.column}
-[neon-green]{.neon-green}
-
-[neon-blue]{.neon-blue}
-
-[neon-pink]{.neon-pink}
-
-:::
-
-
-::: {.column}
-[neon-green-hl]{.neon-green-hl}
-
-[neon-blue-hl]{.neon-blue-hl}
-
-[neon-pink-hl]{.neon-pink-hl}
-
-[neon-coral-hl]{.neon-coral-hl}
-
-[neon-orange-hl]{.neon-orange-hl}
-
-[neon-yellow-hl]{.neon-yellow-hl}
-:::
-::::
-
-## Colours inverse {.inverse}
-
-Colour classes for text and highlights:
-
-:::: {.columns}
-::: {.column}
-
-[pastel-purple]{.pastel-purple}
-
-[pastel-pink]{.pastel-pink}
-
-[pastel-green]{.pastel-green}
-
-[pastel-blue]{.pastel-blue}
-:::
-
-
-::: {.column}
-[pastel-pink-hl]{.pastel-pink-hl}
-
-[pastel-green-hl]{.pastel-green-hl}
-
-[pastel-blue-hl]{.pastel-blue-hl}
-
-[pastel-purple-hl]{.pastel-purple-hl}
-:::
-::::
-
-
-## Columns with backgrounds
-
-Use class `.col-box-{color}` to apply colour box styling
-
-::: {columns}
-::: {.column .col-box-neon-pink width="32%"}
-Box 1: pink
-
-Default height is 450px
-:::
-
-::: {.column .col-box-neon-blue width="32%"}
-Box 2: blue
-
-:::
-
-::: {.column .col-box-neon-green width="32%"}
-Box 3: green
-:::
-:::
-
-
-## Columns with backgrounds
-
-::::: {columns}
-:::: {.column .col-box-pastel-green-tall width="49%"}
-Colour box styling can be applied to entire columns
-
-This has height 600px
-::::
-
-:::: {.column width="49%"}
-:::{.col-box-pastel-pink-short}
-Or to divs within columns to create stacks
-:::
-
-:::{.col-box-pastel-blue-short}
-This div has height 300px
-:::
-
-::::
-
-:::::
-
-## Custom callouts {.smaller80}
-
-:::{.callout-note}
-A note
-:::
-
-:::{.callout-warning}
-A warning
-:::
-
-:::{.callout-important}
-Something important
-:::
-
-:::{.callout-tip}
-This is a good idea
-:::
-
-:::{.callout-caution}
-Be careful about doing this
-:::
-
-## Syntax highlighting
-
-```{r}
-#| echo: true
-#| eval: false
-library(dplyr)
-
-penguins %>%
-  mutate(
-    long_flipper = case_when(
-      species == "Adelie" & flipper_len > 195 ~ TRUE,
-      species == "Chinstrap" & flipper_len > 200 ~ TRUE,
-      species == "Gentoo" & flipper_len > 225 ~ TRUE,
-      TRUE ~ FALSE
-    )
-  ) %>%
-  mutate(
-    body_mass_kg = body_mass / 1000,
-    bill_len_cm = bill_len / 10,
-    bill_dep_cm = bill_dep / 10
-  )
-```
