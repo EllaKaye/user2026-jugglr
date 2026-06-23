@@ -490,4 +490,12 @@ Alphabetical unless told otherwise with `Collate`
 
 ## {background-image="images/jugglr-takeaway.png" background-size="contain"}
 
-# An awesome last slide {.inverse .center-h .larger200}
+# {.inverse .center-h}
+
+[What are your questions?]{.green .larger250}
+
+<br>
+
+[ellakaye.github.io/jugglr](https://ellakaye.github.io/jugglr){.larger200}
+
+[ellakaye.co.uk](https://ellakaye.co.uk){.larger200}
