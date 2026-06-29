@@ -1,7 +1,7 @@
 ---
 title: Juggling with S7
 author: Ella Kaye
-date: 2026-06-23
+date: 2026-07-29
 date-format: long
 execute:
   echo: true
@@ -35,10 +35,6 @@ knitr::opts_chunk$set(message = TRUE)
 
 # siteswap {.inverse .center-h .larger200}
 
-## {background-image="images/3.gif" background-size="33%" background-position="50% 80%"}
-
-## [33333...]{.larger250 .dark} {background-image="images/3.gif" background-size="33%" background-position="50% 80%"}
-
 ## [3]{.larger250 .dark} {background-image="images/3.gif" background-size="33%" background-position="50% 80%"}
 
 ## [4]{.larger250 .dark} {background-image="images/4.gif" background-size="33%" background-position="50% 80%"}
@@ -47,27 +43,96 @@ knitr::opts_chunk$set(message = TRUE)
 
 ## [(4,4)]{.larger250 .dark} {background-image="images/4s.gif" background-size="33%" background-position="50% 80%"}
 
-## [(4x,4x)]{.larger250 .dark} {background-image="images/4x4x.gif" background-size="33%" background-position="50% 80%"}
+# {.center-h}
 
-## [(4,4)(4x,4x)]{.larger250 .dark} {background-image="images/44x.gif" background-size="33%" background-position="50% 80%"}
+![](images/jugglr.png)
 
-## [[54]24]{.larger250 .dark} {background-image="images/54_24.gif" background-size="33%" background-position="50% 80%"}
+[**ellakaye.github.io/jugglr**](https://ellakaye.github.io/jugglr){.larger200}
 
-## [(2,6x)([6x4x],2x)]{.larger250 .dark} {background-image="images/sync_multi.gif" background-size="33%" background-position="50% 80%"}
+## Create and validate (juggleable) siteswap
 
-## [<3p|3p>]{.larger250 .dark} {background-image="images/3p.gif" background-size="33%" background-position="50% 80%"}
-
-## Siteswap variations
-
-- vanilla: **423**
-- synchronous: **(4,4)(4x,4x)**
-- multiplex: **[54]24**
-- synchronous multiplex: **[(2,6x)([6x4x],2x)]**
-- passing: **<3p|3p>** or **<4.5 3 3 | 3 4 3.5>**
+```{r}
+library(jugglr)
+ss423 <- siteswap("423")
+ss423
+```
 
 :::{.notes}
-Varies both in notation and in assumptions about how/when the props are thrown amd caught
+`print`
 :::
+
+## Create and validate (juggleable) siteswap {visibility="hidden"}
+
+```{r}
+ss44s <- siteswap("(4,4)")
+ss44s
+```
+
+
+## Create and validate (unjuggleable) siteswap
+
+```{r}
+ss432 <- siteswap("432")
+ss432
+```
+
+
+## Visualise with `timeline`
+
+```{r}
+timeline(ss423)
+```
+
+## Visualise with `timeline`
+
+```{r}
+timeline(ss432)
+```
+
+## Visualise with `timeline` 
+
+```{r}
+ss44s <- siteswap("(4,4)")
+timeline(ss44s, n_cycles = 6)
+```
+
+:::{.notes}
+Different looking plot than for vanilla
+:::
+
+## Visualise with `ladder` {visibility="hidden"}
+
+```{r}
+ladder(ss423)
+```
+
+## Visualise with `ladder` {visibility="hidden"}
+
+```{r}
+ladder(ss432)
+```
+
+## Visualise with `ladder` {visibility="hidden"}
+
+```{r}
+ladder(ss44s, n_cycles = 6)
+```
+
+## Animations {visibility="hidden"}
+
+A wrapper to the [JugglingLab GIF server](https://jugglinglab.org/html/animinfo.html).
+
+In RStudio/Positron, by default the GIF will be displayed in the Viewer pane. Set a `path` to save the file.
+
+```{r}
+#| eval: false
+animate(
+  ss423,
+  colors = c("#D4006A", "#006AD4", "#00D46A"),
+  path = "images/423.gif"
+)
+```
+
 
 # S7 {.inverse .center-h .larger200}
 
@@ -91,33 +156,16 @@ OOP, combines best of S3 and S4, whilst attempting to avoid the pitfalls of each
 
 [method]{.orange}
 
-## S3 example: `data.frame` {.smaller80}
-
-```{r}
-head(penguins, 3)
-```
-
-. . .
-
-```{r}
-c(class(penguins), class(penguins$species), class(penguins$bill_dep))
-```
-
-. . .
-
-```{r}
-summary(penguins[c("species", "bill_len")])
-```
+:::{.notes}
+Give example of ``print and `summary` with `data.frame` and `lm` objects
+:::
 
 ## Class hierarchy
 
 ```
 Siteswap  
 ├── vanillaSiteswap
-├── synchronousSiteswap
-├── multiplexSiteswap
-├── synchronousMultiplexSiteswap
-└── passingSiteswap
+└── synchronousSiteswap
 ```
 
 . . .
@@ -125,8 +173,6 @@ Siteswap
 <br>
 
 ```{r}
-library(jugglr)
-ss423 <- siteswap("423")
 class(ss423)
 ```
 
@@ -151,14 +197,13 @@ siteswap <- function(sequence) {
     ...
   } else {
     cli::cli_abort(
-      "Not valid vanilla, synchronous,..., siteswap notation.",
-      class = "jugglr_error_not_valid_siteswap"
+      "Not valid vanilla, synchronous,..., siteswap notation."
     )
   }
 }
 ```
 
-## `Siteswap`
+## `Siteswap` class constructor
 
 ```{r}
 library(S7)
@@ -201,9 +246,20 @@ Siteswap <- new_class(
 ## Validation in practice
 
 ```{r}
-#| error: true
 Siteswap("423")
+```
+
+. . .
+
+```{r}
+#| error: true
 Siteswap(423)
+```
+
+. . .
+
+```{r}
+#| error: true
 Siteswap(c("423", "3"))
 ```
 
@@ -271,6 +327,8 @@ vanillaSiteswap <- new_class(
 ```
 
 :::{.notes}
+Don't have a sequence property - inherits from parentSiteswap
+
 Can use ealier defined properties in later prop definitions
 :::
 
@@ -288,8 +346,103 @@ ss423
 ss423@n_props <- 4
 ```
 
+. . .
+
+```{r}
+#| error: true
+vanillaSiteswap("(4,4)")
+```
+
 :::{.notes}
 Note no print method!
+:::
+
+## Defining methods
+
+```{r}
+#| code-line-numbers: "1|2-7"
+method(print, Siteswap) <- function(x, ...) {
+  if (x@valid) {
+    cli::cli_bullets(c(
+      "v" = "'{x@sequence}' is valid siteswap",
+      "i" = "It uses {x@n_props} props"
+    ))
+  } else {
+    cli::cli_bullets(c(
+      "x" = "'{x@sequence}' is not a valid juggling pattern",
+    ))
+  }
+}
+```
+
+. . .
+
+```{r}
+ss423
+```
+
+
+## Registering generics
+
+```{r}
+#| eval: false
+#| code-line-numbers: "1-13|4-9"
+timeline <- new_generic(
+  "timeline",
+  "siteswap",
+  function(
+    siteswap,
+    n_cycles = 3,
+    title = TRUE,
+    subtitle = TRUE,
+    ...
+  ) {
+    S7_dispatch()
+  }
+)
+```
+
+:::{.notes}
+Methods signature matches generic (can have additional arguments)
+:::
+
+## Method compatibility
+
+```{r}
+#| eval: false
+method(timeline, vanillaSiteswap) <- function(
+  siteswap,
+  n_cycles = 3,
+  title = TRUE,
+  subtitle = TRUE
+) {
+  # ggplot2 code for vanillaSiteswap timeline
+}
+```
+
+## Method compatibility
+
+```{r}
+#| eval: false
+method(timeline, synchronousSiteswap) <- function(
+  siteswap,
+  n_cycles = 3,
+  title = TRUE,
+  subtitle = TRUE
+) {
+  # ggplot2 code for synchronousSiteswap timeline
+}
+```
+
+
+
+## More in jugglr...
+
+:::{.incremental}
+- More properties, e.g. [symmetry]{.pink}, [period]{.blue}
+- More siteswap types: [multiplex]{.purple}, [synchronous multiplex]{.pink}, [passing]{.blue}
+- More visualisation: [ladder diagrams]{.blue}, [throw data]{.purple}
+- Animations via Juggling Lab GIF server: [viewer]{.blue}, [file]{.pink}
 :::
 
 # S7 in packages {.inverse .center-h .larger200}
@@ -318,26 +471,6 @@ Imports: S7
 NULL
 ```
 
-## Registering methods: don't `@export`!
-
-in any `.R` file (in S7 v0.2.2):
-
-```{r}
-#| eval: false
-.onLoad <- function(...) {
-  methods_register()
-}
-```
-
-
-:::{.notes}
-Unlike S3/S4, S7 method dispatch is not wired through NAMESPACE — it registers at load time. Without this, methods silently don't dispatch.
-
-zzz.R because it loads last (S7_on_build needs to be called after methods have been registered)
-
-The way this is done is changed in the S7 devel version
-:::
-
 ## Package name in all classes
 
 ```{r}
@@ -352,28 +485,62 @@ Siteswap <- new_class(
 )
 ```
 
-## Documentation
+
+:::{.notes}
+Unlike S3/S4, S7 method dispatch is not wired through NAMESPACE — it registers at load time. Without this, methods silently don't dispatch.
+
+zzz.R because it loads last (S7_on_build needs to be called after methods have been registered)
+
+The way this is done is changed in the S7 devel version
+:::
+
+## What to document and export
 
 roxygen2 8.0.0 provides [first-class support for S7](https://roxygen2.r-lib.org/articles/rd-S7.html).
 
-In `DESCRIPTION`:
+. . .
 
-```
-Config/roxygen2/version: 8.0.0
-Config/roxygen2/markdown: TRUE
-```
+:::{.center-h .larger200}
+**[&#10003; Generics]{.pink}**
+::: 
 
-## What to document
+. . .
 
-:::{.incremental}
-- **Generics**: mention that the function is a generic and list the available methods.
-  - `doclistling::methods_list()`
-- **Methods**: link back to the generic; only document individually when the method has unique behavior or arguments.
-- **Classes**: document the constructor 
-  - `@param` for constructor arguments
-  - `@prop` for additional (e.g. read-only computed) properties
-  - `@export`
+:::{.center-h .larger200}
+**[? Methods]{.blue}**
 :::
+
+. . .
+
+:::{.center-h .larger200}
+**[&#10003; Classes]{.purple}**
+:::
+
+. . .
+
+:::{.center-h .larger150}
+`@param`, `@prop`
+:::
+
+:::{.notes}
+generics - list available methods
+
+methods - only document individually when the method has unique behavior or arguments
+
+classes - document the constructor
+:::
+
+## Registering methods: don't `@export`!
+
+in any `.R` file (in S7 v0.2.2):
+
+```{r}
+#| eval: false
+.onLoad <- function(...) {
+  methods_register()
+}
+```
+
 
 ## Subclasses must be defined after parent class
 
@@ -401,86 +568,6 @@ The order in which files are loaded matters
 Alphabetical unless told otherwise with `Collate`
 :::
 
-# {.center-h}
-
-![](images/jugglr.png)
-
-[**ellakaye.github.io/jugglr**](https://ellakaye.github.io/jugglr){.larger200}
-
-## Create and validate (juggleable) siteswap
-
-```{r}
-library(jugglr)
-ss423 <- siteswap("423")
-ss423
-```
-
-
-## Create and validate (juggleable) siteswap
-
-```{r}
-ss444x4x <- siteswap("(4,4)(4x,4x)")
-ss444x4x
-```
-
-## Create and validate (unjuggleable) siteswap
-
-```{r}
-ss432 <- siteswap("432")
-ss432
-```
-
-## Visualise with `timeline`
-
-```{r}
-timeline(ss423)
-```
-
-## Visualise with `timeline`
-
-```{r}
-timeline(ss432)
-```
-
-## Visualise with `timeline`
-
-```{r}
-timeline(ss444x4x)
-```
-
-## Visualise with `ladder`
-
-```{r}
-ladder(ss423)
-```
-
-## Visualise with `ladder` {visibility="hidden"}
-
-```{r}
-ladder(ss432)
-```
-
-## Visualise with `ladder` {visibility="hidden"}
-
-```{r}
-ladder(ss444x4x)
-```
-
-## Animations
-
-A wrapper to the [JugglingLab GIF server](https://jugglinglab.org/html/animinfo.html).
-
-In RStudio/Positron, by default the GIF will be displayed in the Viewer pane. Set a `path` to save the file.
-
-```{r}
-#| eval: false
-animate(
-  ss423,
-  colors = c("#D4006A", "#006AD4", "#00D46A"),
-  path = "images/423.gif"
-)
-```
-
 
 # Key takeaway {.inverse .center-h .larger200}
 
@@ -499,3 +586,27 @@ animate(
 [ellakaye.github.io/jugglr](https://ellakaye.github.io/jugglr){.larger200}
 
 [ellakaye.co.uk](https://ellakaye.co.uk){.larger200}
+
+# Extra slides {.inverse .center-h .larger200}
+
+## [(4x,4x)]{.larger250 .dark} {background-image="images/4x4x.gif" background-size="33%" background-position="50% 80%"}
+
+## [(4,4)(4x,4x)]{.larger250 .dark} {background-image="images/44x.gif" background-size="33%" background-position="50% 80%"}
+
+## [[54]24]{.larger250 .dark} {background-image="images/54_24.gif" background-size="33%" background-position="50% 80%"}
+
+## [(2,6x)([6x4x],2x)]{.larger250 .dark} {background-image="images/sync_multi.gif" background-size="33%" background-position="50% 80%"}
+
+## [<3p|3p>]{.larger250 .dark} {background-image="images/3p.gif" background-size="33%" background-position="50% 80%"}
+
+## Siteswap variations
+
+- vanilla: **423**
+- synchronous: **(4,4)(4x,4x)**
+- multiplex: **[54]24**
+- synchronous multiplex: **[(2,6x)([6x4x],2x)]**
+- passing: **<3p|3p>** or **<4.5 3 3 | 3 4 3.5>**
+
+:::{.notes}
+Varies both in notation and in assumptions about how/when the props are thrown amd caught
+:::
