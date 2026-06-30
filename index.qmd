@@ -1,7 +1,7 @@
 ---
 title: Juggling with S7
 author: Ella Kaye
-date: 2026-07-29
+date: 2026-07-09
 date-format: long
 execute:
   echo: true
@@ -9,12 +9,7 @@ execute:
 format:
   ellakayepres-revealjs: 
     slide-number: false
-#format: 
-#  revealjs: 
-#    theme: jugglr.scss
-#    syntax-highlighting: jugglr.theme
-#    width: 1280
-#    height: 720
+    progress: false
 ---
 
 ## {background-image="images/learning.png" background-size="contain"}
@@ -138,6 +133,8 @@ animate(
 
 :::{.notes}
 OOP, combines best of S3 and S4, whilst attempting to avoid the pitfalls of each
+
+Future of OOP in R
 :::
 
 ## {.center-h .larger250 .center}
@@ -157,7 +154,7 @@ OOP, combines best of S3 and S4, whilst attempting to avoid the pitfalls of each
 [method]{.orange}
 
 :::{.notes}
-Give example of ``print and `summary` with `data.frame` and `lm` objects
+Give example of `print` and `summary` with `data.frame` and `lm` objects
 :::
 
 ## Class hierarchy
@@ -179,8 +176,6 @@ class(ss423)
 
 :::{.notes}
 ss423 gets parent class and S7
-
-`siteswap` rather than class constructor - will come back to this
 :::
 
 ## Helper to assign correct class
@@ -188,16 +183,15 @@ ss423 gets parent class and S7
 ```{r}
 #| eval: false
 #| label: siteswap-fn
-#| code-line-numbers: "1-13|2-3|4-7"
+#| code-line-numbers: "1-12|2-3|4-6"
 siteswap <- function(sequence) {
   if (is_vanilla_notation(sequence)) {
     vanillaSiteswap(sequence)
   } else if (is_sync_notation(sequence)) {
     synchronousSiteswap(sequence)
-    ...
   } else {
     cli::cli_abort(
-      "Not valid vanilla, synchronous,..., siteswap notation."
+      "Not valid vanilla or synchronous siteswap notation."
     )
   }
 }
@@ -218,9 +212,8 @@ Siteswap <- new_class(
 
 :::{.notes}
 Building simplified versions of `Siteswap` and `vanillaSiteswap` class in these slides.
-The versions in jugglr have more properties and defined,
-as well as methods and generics.
 
+The versions in jugglr have more properties and more complex methods.
 :::
 
 ## `Siteswap` with property validator
@@ -294,7 +287,7 @@ is_vanilla_notation <- function(sequence) {
 ```
 
 ```{r}
-#| code-line-numbers: 1-3|4-10|11-16|17-22|23-28
+#| code-line-numbers: 1,3|4-10|11-16|17-22|23-28
 vanillaSiteswap <- new_class(
   "vanillaSiteswap",
   parent = Siteswap,
@@ -327,7 +320,9 @@ vanillaSiteswap <- new_class(
 ```
 
 :::{.notes}
-Don't have a sequence property - inherits from parentSiteswap
+Don't define a sequence property - inherits from parentSiteswap
+
+Can still have class validator based on sequence property
 
 Can use ealier defined properties in later prop definitions
 :::
@@ -374,6 +369,10 @@ method(print, Siteswap) <- function(x, ...) {
   }
 }
 ```
+
+:::{.notes}
+print is a generic defined in base R
+:::
 
 . . .
 
@@ -542,28 +541,35 @@ in any `.R` file (in S7 v0.2.2):
 ```
 
 
-## Subclasses must be defined after parent class
+## Order matters
 
-In `vanillaSiteswap.R`:
+- Subclass after parent class
+- Methods after generic and class
 
 ```{r}
 #| eval: false
-#' @include siteswap.R
-#' @include utils.R
+# vanillaSiteswap.R
+
+#' @include siteswap.R # contains `Siteswap`
+#' @include generics.R # contains `timeline`
 NULL
 ```
+
+. . .
 
 This generates `DESCRIPTION` field:
 
 ```
 Collate:
-    'utils.R'
+    'generics.R'
     'siteswap.R'
     'vanillaSiteswap.R'
 ```
 
 :::{.notes}
 The order in which files are loaded matters
+
+Use @include
 
 Alphabetical unless told otherwise with `Collate`
 :::
