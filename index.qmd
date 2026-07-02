@@ -12,7 +12,7 @@ format:
     progress: false
 ---
 
-## {background-image="images/learning.png" background-size="contain"}
+## {background-image="images/learning.png" background-size="contain" aria-label="A circle labelled with 'learning'"}
 
 ```{r}
 #| label: setup
@@ -20,27 +20,27 @@ format:
 knitr::opts_chunk$set(message = TRUE)
 ```
 
-## {background-image="images/juggling.png" background-size="contain"}
+## {background-image="images/juggling.png" background-size="contain" aria-label="A Venn diagram with 'learning' and 'juggling' labelled"}
 
-## {background-image="images/maths.png" background-size="contain"}
+## {background-image="images/maths.png" background-size="contain" aria-label="A Venn diagram with 'learning', 'juggling' and 'maths' labelled"}
 
-## {background-image="images/packages.png" background-size="contain"}
+## {background-image="images/packages.png" background-size="contain" aria-label="A Venn diagram with 'learning', 'juggling', 'maths' and 'packages' labelled"}
 
-## {background-image="images/jugglr-interest.png" background-size="contain"}
+## {background-image="images/jugglr-interest.png" background-size="contain" aria-label="A Venn diagram with 'learning', 'juggling', 'maths' and 'packages' labelled, with a hex for the 'jugglr' package at the intersection of all four circles"}
 
 # siteswap {.inverse .center-h .larger200}
 
-## [3]{.larger250 .dark} {background-image="images/3.gif" background-size="33%" background-position="50% 80%"}
+## [3]{.larger250 .dark} {background-image="images/3.gif" background-size="33%" background-position="50% 80%" aria-label="A animated gif of juggling 3 balls in a cascade pattern"}
 
-## [4]{.larger250 .dark} {background-image="images/4.gif" background-size="33%" background-position="50% 80%"}
+## [4]{.larger250 .dark} {background-image="images/4.gif" background-size="33%" background-position="50% 80%" aria-label="A animated gif of juggling 4 balls in a fountain pattern"}
 
-## [423]{.larger250 .dark} {background-image="images/423.gif" background-size="33%" background-position="50% 80%"}
+## [423]{.larger250 .dark} {background-image="images/423.gif" background-size="33%" background-position="50% 80%" aria-label="A animated gif of juggling 3 balls in a 423 pattern"}
 
-## [(4,4)]{.larger250 .dark} {background-image="images/4s.gif" background-size="33%" background-position="50% 80%"}
+## [(4,4)]{.larger250 .dark} {background-image="images/4s.gif" background-size="33%" background-position="50% 80%" aria-label="A animated gif of juggling 4 balls in a synchronous 4,4 pattern"}
 
 # {.center-h}
 
-![](images/jugglr.png)
+![](images/jugglr.png){fig-alt="hex for the jugglr package, with the brightly-coloured letters of jugglr appearing to be thrown in a cascade pattern"}
 
 [**ellakaye.github.io/jugglr**](https://ellakaye.github.io/jugglr){.larger200}
 
@@ -77,18 +77,21 @@ ss432
 ## Visualise with `timeline`
 
 ```{r}
+#| fig-alt: "Timeline diagram of the 423 siteswap pattern, showing the throws and catches of three props over time. Each throw is shown as an arc, with the height of the arc corresponding to the throw value. The arcs are coloured according to which prop is being thrown."
 timeline(ss423)
 ```
 
 ## Visualise with `timeline`
 
 ```{r}
+#| fig-alt: "Timeline diagram of the 432 siteswap pattern, showing collisions and props appearing over time."
 timeline(ss432)
 ```
 
 ## Visualise with `timeline` 
 
 ```{r}
+#| fig-alt: "Timeline diagram of the (4,4) siteswap pattern, showing the throws and catches of four props over time, with props from one hand shown as arcs above a horizontal line and props from the other hand shown as arcs below the line. The arcs are coloured according to which prop is being thrown."
 ss44s <- siteswap("(4,4)")
 timeline(ss44s, n_cycles = 6)
 ```
@@ -484,7 +487,7 @@ roxygen2 8.0.0 provides [first-class support for S7](https://roxygen2.r-lib.org/
 . . .
 
 :::{.center-h .larger200}
-**[? Methods]{.blue}**
+**[&#10007; Methods]{.blue}**
 :::
 
 . . .
@@ -544,11 +547,11 @@ Documenting with roxygen2 then creates a `Collate` field in DESCRIPTION that ens
 
 # Key takeaway {.inverse .center-h .larger200}
 
-## {background-image="images/juggling-end.png" background-size="contain"}
+## {background-image="images/juggling-end.png" background-size="contain" aria-label="A circle labelled with 'juggling'"}
 
-## {background-image="images/S7-end.png" background-size="contain"}
+## {background-image="images/S7-end.png" background-size="contain" aria-label="A Venn diagram with circles labelled 'juggling' and 'S7'"}
 
-## {background-image="images/jugglr-takeaway.png" background-size="contain"}
+## {background-image="images/jugglr-takeaway.png" background-size="contain" aria-label="A Venn diagram with circles labelled 'juggling' and 'S7' and 'FUN' in the intersection."}
 
 # {.inverse .center-h}
 
