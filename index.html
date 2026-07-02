@@ -1123,6 +1123,7 @@ Ella Kaye
 </div>
 <aside class="notes">
 <p><code>print</code></p>
+<p>Remember ss423 - we’ll come back to it later</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1349,12 +1350,25 @@ display:block!important;
 - @sequence must be length 1</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>Also have class-level validator.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 </div>
 </section>
-<section id="vanillasiteswap-with-computed-properties-and-class-validator" class="slide level2">
-<h2><code>vanillaSiteswap</code> with computed properties and class validator</h2>
+<section id="vanillasiteswap-with-computed-properties" class="slide level2">
+<h2><code>vanillaSiteswap</code> with computed properties</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31" data-code-line-numbers="1,3|4-10|11-16|17-22|23-28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href></a>vanillaSiteswap <span class="ot">&lt;-</span> <span class="fu">new_class</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31" data-code-line-numbers="1,3|4-10|11-16|17-22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href></a>vanillaSiteswap <span class="ot">&lt;-</span> <span class="fu">new_class</span>(</span>
 <span id="cb31-2"><a href></a>  <span class="st">&quot;vanillaSiteswap&quot;</span>,</span>
 <span id="cb31-3"><a href></a>  <span class="at">parent =</span> Siteswap,</span>
 <span id="cb31-4"><a href></a>  <span class="at">properties =</span> <span class="fu">list</span>(</span>
@@ -1373,16 +1387,11 @@ display:block!important;
 <span id="cb31-17"><a href></a>    <span class="at">valid =</span> <span class="fu">new_property</span>(</span>
 <span id="cb31-18"><a href></a>      <span class="at">class =</span> class_logical,</span>
 <span id="cb31-19"><a href></a>      <span class="at">getter =</span> <span class="cf">function</span>(self) {</span>
-<span id="cb31-20"><a href></a>        <span class="fu">can_throw</span>(self<span class="sc">@</span>throws) <span class="sc">&amp;&amp;</span> <span class="fu">is_whole_number</span>(self<span class="sc">@</span>n_props)</span>
+<span id="cb31-20"><a href></a>        <span class="fu">no_collisions</span>(self<span class="sc">@</span>throws) <span class="sc">&amp;&amp;</span> <span class="fu">is_whole_number</span>(self<span class="sc">@</span>n_props)</span>
 <span id="cb31-21"><a href></a>      }</span>
 <span id="cb31-22"><a href></a>    )</span>
-<span id="cb31-23"><a href></a>  ),</span>
-<span id="cb31-24"><a href></a>  <span class="at">validator =</span> <span class="cf">function</span>(self) {</span>
-<span id="cb31-25"><a href></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is_vanilla_notation</span>(self<span class="sc">@</span>sequence)) {</span>
-<span id="cb31-26"><a href></a>      <span class="st">&quot;@sequence must only contain digits and letters.&quot;</span></span>
-<span id="cb31-27"><a href></a>    }</span>
-<span id="cb31-28"><a href></a>  }</span>
-<span id="cb31-29"><a href></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb31-23"><a href></a>  )</span>
+<span id="cb31-24"><a href></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <aside class="notes">
 <p>Don’t define a sequence property - inherits from parentSiteswap</p>
@@ -1413,24 +1422,6 @@ display:block!important;
  @ valid   : logi TRUE</code></pre>
 </div>
 </div>
-<div class="fragment">
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href></a>ss423<span class="sc">@</span>n_props <span class="ot">&lt;-</span> <span class="dv">4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error:
-! Can&#39;t set read-only property &lt;vanillaSiteswap&gt;@n_props</code></pre>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href></a><span class="fu">vanillaSiteswap</span>(<span class="st">&quot;(4,4)&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error:
-! &lt;vanillaSiteswap&gt; object is invalid:
-- @sequence must only contain digits and letters.</code></pre>
-</div>
-</div>
 <aside class="notes">
 <p>Note no print method!</p>
 <style type="text/css">
@@ -1444,23 +1435,31 @@ width: 1px!important;
 overflow: hidden!important;
 display:block!important;
 }</style></aside>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href></a>ss423<span class="sc">@</span>n_props <span class="ot">&lt;-</span> <span class="dv">4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error:
+! Can&#39;t set read-only property &lt;vanillaSiteswap&gt;@n_props</code></pre>
+</div>
+</div>
 </div>
 </section>
 <section id="defining-methods" class="slide level2">
 <h2>Defining methods</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38" data-code-line-numbers="1|2-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href></a><span class="fu">method</span>(print, Siteswap) <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) {</span>
-<span id="cb38-2"><a href></a>  <span class="cf">if</span> (x<span class="sc">@</span>valid) {</span>
-<span id="cb38-3"><a href></a>    cli<span class="sc">::</span><span class="fu">cli_bullets</span>(<span class="fu">c</span>(</span>
-<span id="cb38-4"><a href></a>      <span class="st">&quot;v&quot;</span> <span class="ot">=</span> <span class="st">&quot;&#39;{x@sequence}&#39; is valid siteswap&quot;</span>,</span>
-<span id="cb38-5"><a href></a>      <span class="st">&quot;i&quot;</span> <span class="ot">=</span> <span class="st">&quot;It uses {x@n_props} props&quot;</span></span>
-<span id="cb38-6"><a href></a>    ))</span>
-<span id="cb38-7"><a href></a>  } <span class="cf">else</span> {</span>
-<span id="cb38-8"><a href></a>    cli<span class="sc">::</span><span class="fu">cli_bullets</span>(<span class="fu">c</span>(</span>
-<span id="cb38-9"><a href></a>      <span class="st">&quot;x&quot;</span> <span class="ot">=</span> <span class="st">&quot;&#39;{x@sequence}&#39; is not a valid juggling pattern&quot;</span>,</span>
-<span id="cb38-10"><a href></a>    ))</span>
-<span id="cb38-11"><a href></a>  }</span>
-<span id="cb38-12"><a href></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36" data-code-line-numbers="1|2-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href></a><span class="fu">method</span>(print, Siteswap) <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) {</span>
+<span id="cb36-2"><a href></a>  <span class="cf">if</span> (x<span class="sc">@</span>valid) {</span>
+<span id="cb36-3"><a href></a>    cli<span class="sc">::</span><span class="fu">cli_bullets</span>(<span class="fu">c</span>(</span>
+<span id="cb36-4"><a href></a>      <span class="st">&quot;v&quot;</span> <span class="ot">=</span> <span class="st">&quot;&#39;{x@sequence}&#39; is valid siteswap&quot;</span>,</span>
+<span id="cb36-5"><a href></a>      <span class="st">&quot;i&quot;</span> <span class="ot">=</span> <span class="st">&quot;It uses {x@n_props} props&quot;</span></span>
+<span id="cb36-6"><a href></a>    ))</span>
+<span id="cb36-7"><a href></a>  } <span class="cf">else</span> {</span>
+<span id="cb36-8"><a href></a>    cli<span class="sc">::</span><span class="fu">cli_bullets</span>(<span class="fu">c</span>(</span>
+<span id="cb36-9"><a href></a>      <span class="st">&quot;x&quot;</span> <span class="ot">=</span> <span class="st">&quot;&#39;{x@sequence}&#39; is not a valid juggling pattern&quot;</span>,</span>
+<span id="cb36-10"><a href></a>    ))</span>
+<span id="cb36-11"><a href></a>  }</span>
+<span id="cb36-12"><a href></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <aside class="notes">
 <p>print is a generic defined in base R</p>
@@ -1477,7 +1476,7 @@ display:block!important;
 }</style></aside>
 <div class="fragment">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href></a>ss423</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href></a>ss423</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>✔ &#39;423&#39; is valid siteswap</code></pre>
 </div>
@@ -1487,25 +1486,28 @@ display:block!important;
 </div>
 </div>
 </section>
-<section id="registering-generics" class="slide level2">
-<h2>Registering generics</h2>
+<section id="new-generic-and-methods" class="slide level2">
+<h2>New generic and methods</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42" data-code-line-numbers="1-13|4-9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href></a>timeline <span class="ot">&lt;-</span> <span class="fu">new_generic</span>(</span>
-<span id="cb42-2"><a href></a>  <span class="st">&quot;timeline&quot;</span>,</span>
-<span id="cb42-3"><a href></a>  <span class="st">&quot;siteswap&quot;</span>,</span>
-<span id="cb42-4"><a href></a>  <span class="cf">function</span>(</span>
-<span id="cb42-5"><a href></a>    siteswap,</span>
-<span id="cb42-6"><a href></a>    <span class="at">n_cycles =</span> <span class="dv">3</span>,</span>
-<span id="cb42-7"><a href></a>    <span class="at">title =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb42-8"><a href></a>    <span class="at">subtitle =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb42-9"><a href></a>    ...</span>
-<span id="cb42-10"><a href></a>  ) {</span>
-<span id="cb42-11"><a href></a>    <span class="fu">S7_dispatch</span>()</span>
-<span id="cb42-12"><a href></a>  }</span>
-<span id="cb42-13"><a href></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href></a>timeline <span class="ot">&lt;-</span> <span class="fu">new_generic</span>(<span class="st">&quot;timeline&quot;</span>, <span class="st">&quot;siteswap&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href></a><span class="fu">method</span>(timeline, vanillaSiteswap) <span class="ot">&lt;-</span> <span class="cf">function</span>(siteswap) {</span>
+<span id="cb41-2"><a href></a>  <span class="co"># ggplot2 code for vanillaSiteswap timeline</span></span>
+<span id="cb41-3"><a href></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href></a><span class="fu">method</span>(timeline, synchronousSiteswap) <span class="ot">&lt;-</span> <span class="cf">function</span>(siteswap) {</span>
+<span id="cb42-2"><a href></a>  <span class="co"># ggplot2 code for synchronousSiteswap timeline</span></span>
+<span id="cb42-3"><a href></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <aside class="notes">
-<p>Methods signature matches generic (can have additional arguments)</p>
+<p>Methods signature matches generic</p>
+<p>Can have additional arguments</p>
+<p>S7 dispatch knows which method to use based on the class of the object passed to the generic</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1517,31 +1519,6 @@ width: 1px!important;
 overflow: hidden!important;
 display:block!important;
 }</style></aside>
-</section>
-<section id="method-compatibility" class="slide level2">
-<h2>Method compatibility</h2>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href></a><span class="fu">method</span>(timeline, vanillaSiteswap) <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
-<span id="cb43-2"><a href></a>  siteswap,</span>
-<span id="cb43-3"><a href></a>  <span class="at">n_cycles =</span> <span class="dv">3</span>,</span>
-<span id="cb43-4"><a href></a>  <span class="at">title =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb43-5"><a href></a>  <span class="at">subtitle =</span> <span class="cn">TRUE</span></span>
-<span id="cb43-6"><a href></a>) {</span>
-<span id="cb43-7"><a href></a>  <span class="co"># ggplot2 code for vanillaSiteswap timeline</span></span>
-<span id="cb43-8"><a href></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="method-compatibility-1" class="slide level2">
-<h2>Method compatibility</h2>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href></a><span class="fu">method</span>(timeline, synchronousSiteswap) <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
-<span id="cb44-2"><a href></a>  siteswap,</span>
-<span id="cb44-3"><a href></a>  <span class="at">n_cycles =</span> <span class="dv">3</span>,</span>
-<span id="cb44-4"><a href></a>  <span class="at">title =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb44-5"><a href></a>  <span class="at">subtitle =</span> <span class="cn">TRUE</span></span>
-<span id="cb44-6"><a href></a>) {</span>
-<span id="cb44-7"><a href></a>  <span class="co"># ggplot2 code for synchronousSiteswap timeline</span></span>
-<span id="cb44-8"><a href></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="more-in-jugglr" class="slide level2">
@@ -1549,8 +1526,9 @@ display:block!important;
 <ul>
 <li class="fragment">More properties, e.g. <span class="pink">symmetry</span>, <span class="blue">period</span></li>
 <li class="fragment">More siteswap types: <span class="purple">multiplex</span>, <span class="pink">synchronous multiplex</span>, <span class="blue">passing</span></li>
-<li class="fragment">More visualisation: <span class="blue">ladder diagrams</span>, <span class="purple">throw data</span></li>
-<li class="fragment">Animations via Juggling Lab GIF server: <span class="blue">viewer</span>, <span class="pink">file</span></li>
+<li class="fragment">More visualisations: <span class="blue">ladder diagrams</span>, <span class="purple">throw data</span></li>
+<li class="fragment">More arguments to visualisation generics: e.g. <span class="pink">n_cycles</span>, <span class="purple">title</span></li>
+<li class="fragment">Animations via Juggling Lab GIF server: <span class="purple">viewer</span>, <span class="blue">file</span></li>
 </ul>
 </section></section>
 <section>
@@ -1576,13 +1554,13 @@ display:block!important;
 <section id="package-name-in-all-classes" class="slide level2">
 <h2>Package name in all classes</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47" data-code-line-numbers="1,6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href></a>Siteswap <span class="ot">&lt;-</span> <span class="fu">new_class</span>(</span>
-<span id="cb47-2"><a href></a>  <span class="st">&quot;Siteswap&quot;</span>,</span>
-<span id="cb47-3"><a href></a>  <span class="at">properties =</span> <span class="fu">list</span>(</span>
-<span id="cb47-4"><a href></a>    ...</span>
-<span id="cb47-5"><a href></a>  )</span>
-<span id="cb47-6"><a href></a>  <span class="at">package =</span> <span class="st">&quot;jugglr&quot;</span></span>
-<span id="cb47-7"><a href></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45" data-code-line-numbers="1,6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href></a>Siteswap <span class="ot">&lt;-</span> <span class="fu">new_class</span>(</span>
+<span id="cb45-2"><a href></a>  <span class="st">&quot;Siteswap&quot;</span>,</span>
+<span id="cb45-3"><a href></a>  <span class="at">properties =</span> <span class="fu">list</span>(</span>
+<span id="cb45-4"><a href></a>    ...</span>
+<span id="cb45-5"><a href></a>  )</span>
+<span id="cb45-6"><a href></a>  <span class="at">package =</span> <span class="st">&quot;jugglr&quot;</span></span>
+<span id="cb45-7"><a href></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <aside class="notes">
 <p>Unlike S3/S4, S7 method dispatch is not wired through NAMESPACE — it registers at load time. Without this, methods silently don’t dispatch.</p>
@@ -1643,9 +1621,9 @@ display:block!important;
 <h2>Registering methods: don’t <code>@export</code>!</h2>
 <p>in any <code>.R</code> file (in S7 v0.2.2):</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href></a>.onLoad <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
-<span id="cb48-2"><a href></a>  <span class="fu">methods_register</span>()</span>
-<span id="cb48-3"><a href></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href></a>.onLoad <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
+<span id="cb46-2"><a href></a>  <span class="fu">methods_register</span>()</span>
+<span id="cb46-3"><a href></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="order-matters" class="slide level2">
@@ -1655,22 +1633,16 @@ display:block!important;
 <li>Methods after generic and class</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href></a><span class="co"># vanillaSiteswap.R</span></span>
-<span id="cb49-2"><a href></a></span>
-<span id="cb49-3"><a href></a><span class="co">#&#39; @include siteswap.R # contains `Siteswap`</span></span>
-<span id="cb49-4"><a href></a><span class="co">#&#39; @include generics.R # contains `timeline`</span></span>
-<span id="cb49-5"><a href></a><span class="cn">NULL</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href></a><span class="co"># vanillaSiteswap.R</span></span>
+<span id="cb47-2"><a href></a></span>
+<span id="cb47-3"><a href></a><span class="co">#&#39; @include siteswap.R # contains `Siteswap`</span></span>
+<span id="cb47-4"><a href></a><span class="co">#&#39; @include generics.R # contains `timeline`</span></span>
+<span id="cb47-5"><a href></a><span class="cn">NULL</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="fragment">
-<p>This generates <code>DESCRIPTION</code> field:</p>
-<pre><code>Collate:
-    &#39;generics.R&#39;
-    &#39;siteswap.R&#39;
-    &#39;vanillaSiteswap.R&#39;</code></pre>
 <aside class="notes">
-<p>The order in which files are loaded matters</p>
+<p>The order in which files are loaded matters - alphabetical by filename by default</p>
 <p>Use <span class="citation" data-cites="include">@include</span></p>
-<p>Alphabetical unless told otherwise with <code>Collate</code></p>
+<p>Documenting with roxygen2 then creates a <code>Collate</code> field in DESCRIPTION that ensures files load in the right order</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1682,7 +1654,6 @@ width: 1px!important;
 overflow: hidden!important;
 display:block!important;
 }</style></aside>
-</div>
 </section></section>
 <section>
 <section id="key-takeaway" class="title-slide slide level1 inverse center-h larger200 center">
