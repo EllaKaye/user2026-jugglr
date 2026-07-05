@@ -1215,9 +1215,6 @@ display:block!important;
 </div>
 <div class="fragment">
 <p><span class="purple">generic</span></p>
-</div>
-<div class="fragment">
-<p><span class="orange">method</span></p>
 <aside class="notes">
 <p>Give example of <code>print</code> and <code>summary</code> with <code>data.frame</code> and <code>lm</code> objects</p>
 <style type="text/css">
@@ -1232,6 +1229,9 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </div>
+<div class="fragment">
+<p><span class="orange">method</span></p>
+</div>
 </section>
 <section id="class-hierarchy" class="slide level2">
 <h2>Class hierarchy</h2>
@@ -1241,7 +1241,8 @@ display:block!important;
 <div class="fragment">
 <p><br></p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href></a><span class="fu">class</span>(ss423)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href></a>ss423 <span class="ot">&lt;-</span> <span class="fu">siteswap</span>(<span class="st">&quot;423&quot;</span>)</span>
+<span id="cb20-2"><a href></a><span class="fu">class</span>(ss423)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;jugglr::vanillaSiteswap&quot; &quot;jugglr::Siteswap&quot;       
 [3] &quot;S7_object&quot;              </code></pre>
@@ -1290,8 +1291,7 @@ display:block!important;
 <span id="cb23-7"><a href></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <aside class="notes">
-<p>Building simplified versions of <code>Siteswap</code> and <code>vanillaSiteswap</code> class in these slides.</p>
-<p>The versions in jugglr have more properties and more complex methods.</p>
+<p>Building a simplified version of the jugglr package</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1394,8 +1394,8 @@ display:block!important;
 <span id="cb31-24"><a href></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <aside class="notes">
-<p>Don’t define a sequence property - inherits from parentSiteswap</p>
-<p>Can still have class validator based on sequence property</p>
+<p>Don’t define a sequence property - inherits from parent Siteswap</p>
+<p>Can use sequence value in later property definitions</p>
 <p>Can use ealier defined properties in later prop definitions</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
@@ -1463,6 +1463,7 @@ display:block!important;
 </div>
 <aside class="notes">
 <p>print is a generic defined in base R</p>
+<p>need same args</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1491,6 +1492,19 @@ display:block!important;
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href></a>timeline <span class="ot">&lt;-</span> <span class="fu">new_generic</span>(<span class="st">&quot;timeline&quot;</span>, <span class="st">&quot;siteswap&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<aside class="notes">
+<p>“siteswap” is the dispatch argument, i.e. when <code>timeline</code> is called, it is the class of siteswap that determines which method will be used.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 <div class="fragment">
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href></a><span class="fu">method</span>(timeline, vanillaSiteswap) <span class="ot">&lt;-</span> <span class="cf">function</span>(siteswap) {</span>
@@ -1507,7 +1521,6 @@ display:block!important;
 <aside class="notes">
 <p>Methods signature matches generic</p>
 <p>Can have additional arguments</p>
-<p>S7 dispatch knows which method to use based on the class of the object passed to the generic</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1562,10 +1575,16 @@ display:block!important;
 <span id="cb45-6"><a href></a>  <span class="at">package =</span> <span class="st">&quot;jugglr&quot;</span></span>
 <span id="cb45-7"><a href></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</section>
+<section id="what-to-document-and-export" class="slide level2">
+<h2>What to document and export</h2>
+<p>roxygen2 8.0.0 provides <a href="https://roxygen2.r-lib.org/articles/rd-S7.html">first-class support for S7</a>.</p>
+<div class="fragment">
+<div class="center-h larger200">
+<p><strong><span class="pink">✓ Generics</span></strong></p>
+</div>
 <aside class="notes">
-<p>Unlike S3/S4, S7 method dispatch is not wired through NAMESPACE — it registers at load time. Without this, methods silently don’t dispatch.</p>
-<p>zzz.R because it loads last (S7_on_build needs to be called after methods have been registered)</p>
-<p>The way this is done is changed in the S7 devel version</p>
+<p>generics - list available methods</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1577,19 +1596,24 @@ width: 1px!important;
 overflow: hidden!important;
 display:block!important;
 }</style></aside>
-</section>
-<section id="what-to-document-and-export" class="slide level2">
-<h2>What to document and export</h2>
-<p>roxygen2 8.0.0 provides <a href="https://roxygen2.r-lib.org/articles/rd-S7.html">first-class support for S7</a>.</p>
-<div class="fragment">
-<div class="center-h larger200">
-<p><strong><span class="pink">✓ Generics</span></strong></p>
-</div>
 </div>
 <div class="fragment">
 <div class="center-h larger200">
 <p><strong><span class="blue">✗ Methods</span></strong></p>
 </div>
+<aside class="notes">
+<p>only document individually when the method has unique behavior or arguments</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 </div>
 <div class="fragment">
 <div class="center-h larger200">
@@ -1601,9 +1625,21 @@ display:block!important;
 <p><code>@param</code>, <code>@prop</code></p>
 </div>
 <aside class="notes">
-<p>generics - list available methods</p>
-<p>methods - only document individually when the method has unique behavior or arguments</p>
 <p>classes - document the constructor</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+<aside class="notes">
+<p>In generics documentation, list methods</p>
+<p>Is possible to document methods, but usually not necessary - definitely don’t export</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1625,6 +1661,19 @@ display:block!important;
 <span id="cb46-2"><a href></a>  <span class="fu">methods_register</span>()</span>
 <span id="cb46-3"><a href></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<aside class="notes">
+<p>Unlike S3/S4, S7 method dispatch is not wired through NAMESPACE — it registers at load time. Without this, methods silently don’t dispatch.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 </section>
 <section id="order-matters" class="slide level2">
 <h2>Order matters</h2>
