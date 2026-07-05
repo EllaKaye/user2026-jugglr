@@ -154,13 +154,14 @@ Future of OOP in R
 
 [generic]{.purple}
 
+:::{.notes}
+Give example of `print` and `summary` with `data.frame` and `lm` objects
+:::
+
 . . .
 
 [method]{.orange}
 
-:::{.notes}
-Give example of `print` and `summary` with `data.frame` and `lm` objects
-:::
 
 ## Class hierarchy
 
@@ -175,6 +176,7 @@ Siteswap
 <br>
 
 ```{r}
+ss423 <- siteswap("423")
 class(ss423)
 ```
 
@@ -216,9 +218,7 @@ Siteswap <- new_class(
 
 
 :::{.notes}
-Building simplified versions of `Siteswap` and `vanillaSiteswap` class in these slides.
-
-The versions in jugglr have more properties and more complex methods.
+Building a simplified version of the jugglr package
 :::
 
 ## `Siteswap` with property validator
@@ -325,9 +325,9 @@ vanillaSiteswap <- new_class(
 ```
 
 :::{.notes}
-Don't define a sequence property - inherits from parentSiteswap
+Don't define a sequence property - inherits from parent Siteswap
 
-Can still have class validator based on sequence property
+Can use sequence value in later property definitions
 
 Can use ealier defined properties in later prop definitions
 :::
@@ -372,6 +372,8 @@ method(print, Siteswap) <- function(x, ...) {
 
 :::{.notes}
 print is a generic defined in base R
+
+need same args
 :::
 
 . . .
@@ -387,6 +389,11 @@ ss423
 #| eval: false
 timeline <- new_generic("timeline", "siteswap")
 ```
+
+:::{.notes}
+"siteswap" is the dispatch argument, i.e. when `timeline` is called, it is the class of siteswap that determines which method will be used.
+:::
+
 
 . . .
 
@@ -411,8 +418,6 @@ method(timeline, synchronousSiteswap) <- function(siteswap) {
 Methods signature matches generic
 
 Can have additional arguments
-
-S7 dispatch knows which method to use based on the class of the object passed to the generic
 :::
 
 ## More in jugglr...
@@ -465,15 +470,6 @@ Siteswap <- new_class(
 )
 ```
 
-
-:::{.notes}
-Unlike S3/S4, S7 method dispatch is not wired through NAMESPACE — it registers at load time. Without this, methods silently don't dispatch.
-
-zzz.R because it loads last (S7_on_build needs to be called after methods have been registered)
-
-The way this is done is changed in the S7 devel version
-:::
-
 ## What to document and export
 
 roxygen2 8.0.0 provides [first-class support for S7](https://roxygen2.r-lib.org/articles/rd-S7.html).
@@ -484,10 +480,18 @@ roxygen2 8.0.0 provides [first-class support for S7](https://roxygen2.r-lib.org/
 **[&#10003; Generics]{.pink}**
 ::: 
 
+:::{.notes}
+generics - list available methods
+:::
+
 . . .
 
 :::{.center-h .larger200}
 **[&#10007; Methods]{.blue}**
+:::
+
+:::{.notes}
+only document individually when the method has unique behavior or arguments
 :::
 
 . . .
@@ -503,11 +507,13 @@ roxygen2 8.0.0 provides [first-class support for S7](https://roxygen2.r-lib.org/
 :::
 
 :::{.notes}
-generics - list available methods
-
-methods - only document individually when the method has unique behavior or arguments
-
 classes - document the constructor
+:::
+
+:::{.notes}
+In generics documentation, list methods
+
+Is possible to document methods, but usually not necessary - definitely don't export
 :::
 
 ## Registering methods: don't `@export`!
@@ -520,6 +526,12 @@ in any `.R` file (in S7 v0.2.2):
   methods_register()
 }
 ```
+
+
+:::{.notes}
+Unlike S3/S4, S7 method dispatch is not wired through NAMESPACE — it registers at load time. Without this, methods silently don't dispatch.
+:::
+
 
 
 ## Order matters
