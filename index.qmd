@@ -592,9 +592,9 @@ Documenting with roxygen2 then creates a `Collate` field in DESCRIPTION that ens
 - vanilla: **423**
 - synchronous: **(4,4)(4x,4x)**
 - multiplex: **[54]24**
-- synchronous multiplex: **[(2,6x)([6x4x],2x)]**
+- synchronous multiplex: **(2,6x)([6x4x],2x)**
 - passing: **<3p|3p>** or **<4.5 3 3 | 3 4 3.5>**
 
 :::{.notes}
-Varies both in notation and in assumptions about how/when the props are thrown amd caught
+Varies both in notation and in assumptions about how/when the props are thrown and caught
 :::
