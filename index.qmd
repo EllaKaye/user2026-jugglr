@@ -430,6 +430,27 @@ Can have additional arguments
 - Animations via Juggling Lab GIF server: [viewer]{.purple}, [file]{.blue}
 :::
 
+
+# Key takeaway {.inverse .center-h .larger200}
+
+## {background-image="images/juggling-end.png" background-size="contain" aria-label="A circle labelled with 'juggling'"}
+
+## {background-image="images/S7-end.png" background-size="contain" aria-label="A Venn diagram with circles labelled 'juggling' and 'S7'"}
+
+## {background-image="images/jugglr-takeaway.png" background-size="contain" aria-label="A Venn diagram with circles labelled 'juggling' and 'S7' and 'FUN' in the intersection."}
+
+# {.inverse .center-h}
+
+[What are your questions?]{.green .larger250}
+
+<br>
+
+[ellakaye.github.io/jugglr](https://ellakaye.github.io/jugglr){.larger200}
+
+[ellakaye.co.uk](https://ellakaye.co.uk){.larger200}
+
+# Extra slides {.inverse .center-h .larger200}
+
 # S7 in packages {.inverse .center-h .larger200}
 
 ::: {.notes}
@@ -532,8 +553,6 @@ in any `.R` file (in S7 v0.2.2):
 Unlike S3/S4, S7 method dispatch is not wired through NAMESPACE — it registers at load time. Without this, methods silently don't dispatch.
 :::
 
-
-
 ## Order matters
 
 - Subclass after parent class
@@ -556,26 +575,7 @@ Use @include
 Documenting with roxygen2 then creates a `Collate` field in DESCRIPTION that ensures files load in the right order
 :::
 
-
-# Key takeaway {.inverse .center-h .larger200}
-
-## {background-image="images/juggling-end.png" background-size="contain" aria-label="A circle labelled with 'juggling'"}
-
-## {background-image="images/S7-end.png" background-size="contain" aria-label="A Venn diagram with circles labelled 'juggling' and 'S7'"}
-
-## {background-image="images/jugglr-takeaway.png" background-size="contain" aria-label="A Venn diagram with circles labelled 'juggling' and 'S7' and 'FUN' in the intersection."}
-
-# {.inverse .center-h}
-
-[What are your questions?]{.green .larger250}
-
-<br>
-
-[ellakaye.github.io/jugglr](https://ellakaye.github.io/jugglr){.larger200}
-
-[ellakaye.co.uk](https://ellakaye.co.uk){.larger200}
-
-# Extra slides {.inverse .center-h .larger200}
+# More juggling! {.inverse .center-h .larger200}
 
 ## [(4x,4x)]{.larger250 .dark} {background-image="images/4x4x.gif" background-size="33%" background-position="50% 80%"}
 
@@ -598,3 +598,4 @@ Documenting with roxygen2 then creates a `Collate` field in DESCRIPTION that ens
 :::{.notes}
 Varies both in notation and in assumptions about how/when the props are thrown and caught
 :::
+
